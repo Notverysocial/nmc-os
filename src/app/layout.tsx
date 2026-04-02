@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
-import NavSPA from "@/components/NavSPA";
-import Footer from "@/components/Footer";
+import RootLayoutShell from "@/components/RootLayoutShell";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -38,9 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${syne.variable}`}>
       <body>
-        <NavSPA />
-        <main>{children}</main>
-        <Footer />
+        <RootLayoutShell>{children}</RootLayoutShell>
       </body>
     </html>
   );

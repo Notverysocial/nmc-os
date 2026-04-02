@@ -111,27 +111,62 @@ const caseStudies = [
 
 const plans = [
   {
-    tier: "Starter",
+    tier: "Foundation",
     price: "$499",
-    description: "For solo operators and small teams ready to automate core workflows.",
-    features: ["Operations Dashboard (5 users)", "Content Calendar & Scheduling", "Basic AI Assistant", "CRM up to 2,500 contacts", "Invoicing & Payment tracking", "10 automation workflows", "Onboarding call (2 hrs)"],
-    cta: "Start with Starter",
+    period: "/mo",
+    description: "The essentials for solo operators and small teams ready to get organized and capture more leads.",
+    features: [
+      "Branded workspace",
+      "Operations dashboard with KPIs",
+      "Lead capture forms + basic CRM pipeline",
+      "Booking / scheduling system",
+      "Weekly intelligence brief",
+      "Basic project management (task boards)",
+      "Email support",
+      "Monthly optimization call",
+    ],
+    cta: "Get Started",
+    tierKey: "Foundation",
   },
   {
     tier: "Growth",
     price: "$999",
-    description: "For scaling companies that need a full OS — custom AI, client portals, and advanced analytics.",
-    features: ["Everything in Starter", "Unlimited team members", "Custom AI (trained on your data)", "Full Client Portal (branded)", "Advanced Analytics", "Unlimited automations", "Team management tools", "Priority support + Slack", "White-glove onboarding (8 hrs)", "Quarterly strategy reviews"],
-    cta: "Start with Growth",
+    period: "/mo",
+    description: "For scaling companies that need a full OS with active AI agents, automation, and client tools.",
+    features: [
+      "Everything in Foundation",
+      "Daily intelligence briefs (personalized)",
+      "3 active AI agents (Lead Scout, Content Writer, Outreach Agent)",
+      "Automated lead nurture sequences",
+      "Invoicing and billing tools",
+      "Analytics dashboard",
+      "Client portal",
+      "Integration hub",
+      "Bi-weekly strategy calls",
+    ],
+    cta: "Get Started",
     popular: true,
+    tierKey: "Growth",
   },
   {
     tier: "Enterprise",
     price: "Custom",
+    subPrice: "$2,500+/mo",
     description: "For multi-location businesses that need a fully bespoke, white-labeled operations platform.",
-    features: ["Everything in Growth", "Fully custom workflows", "White-label & custom domain", "Custom AI models", "Dedicated implementation team", "99.9% uptime SLA", "Custom API integrations", "Monthly strategy sessions"],
-    cta: "Contact Sales",
+    features: [
+      "Everything in Growth",
+      "Unlimited custom agents",
+      "Full workflow automation builder",
+      "White-labeled platform",
+      "Dedicated account manager",
+      "Custom integrations",
+      "Weekly strategy sessions",
+      "Priority feature development",
+      "Multi-user team access with roles",
+    ],
+    cta: "Book a Strategy Call",
     enterprise: true,
+    tierKey: "Enterprise",
   },
 ];
 
@@ -250,14 +285,47 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 // ─── CONTACT FORM ─────────────────────────────────────────────────────────────
 
-function ContactForm() {
+function ContactForm({ defaultTier }: { defaultTier?: string }) {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    tier_interest: defaultTier || "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Update tier when parent changes it (e.g. clicking Enterprise CTA)
+  useState(() => {
+    if (defaultTier) setFormData((p) => ({ ...p, tier_interest: defaultTier }));
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!formData.tier_interest) { setError("Please select a plan tier."); return; }
+    setSubmitting(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to submit");
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  const set = (k: string, v: string) => setFormData((p) => ({ ...p, [k]: v }));
+  const inputCls = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#8892A4] text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors";
 
   if (submitted) {
     return (
@@ -277,24 +345,57 @@ function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">Full Name *</label>
-          <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#8892A4] text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors" placeholder="Your name" />
+          <input type="text" required value={formData.name} onChange={(e) => set("name", e.target.value)} className={inputCls} placeholder="Your name" />
         </div>
         <div>
           <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">Email *</label>
-          <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#8892A4] text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors" placeholder="you@company.com" />
+          <input type="email" required value={formData.email} onChange={(e) => set("email", e.target.value)} className={inputCls} placeholder="you@company.com" />
+        </div>
+      </div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">Phone</label>
+          <input type="tel" value={formData.phone} onChange={(e) => set("phone", e.target.value)} className={inputCls} placeholder="+1 (555) 000-0000" />
+        </div>
+        <div>
+          <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">Company</label>
+          <input type="text" value={formData.company} onChange={(e) => set("company", e.target.value)} className={inputCls} placeholder="Acme Corp" />
         </div>
       </div>
       <div>
-        <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">Company *</label>
-        <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#8892A4] text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors" placeholder="Acme Corp" />
+        <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">Interested In *</label>
+        <select
+          required
+          value={formData.tier_interest}
+          onChange={(e) => set("tier_interest", e.target.value)}
+          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors appearance-none cursor-pointer"
+          style={{ color: formData.tier_interest ? "#fff" : "#8892A4" }}
+        >
+          <option value="" disabled style={{ background: "#0D1424", color: "#8892A4" }}>Select a plan tier...</option>
+          <option value="Foundation" style={{ background: "#0D1424", color: "#fff" }}>Foundation — $499/mo</option>
+          <option value="Growth" style={{ background: "#0D1424", color: "#fff" }}>Growth — $999/mo</option>
+          <option value="Enterprise" style={{ background: "#0D1424", color: "#fff" }}>Enterprise — Custom ($2,500+/mo)</option>
+        </select>
       </div>
       <div>
-        <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">What's your biggest challenge?</label>
-        <textarea rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#8892A4] text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors resize-none" placeholder="Tell us what's slowing you down..." />
+        <label className="text-[#8892A4] text-xs font-medium uppercase tracking-wide block mb-2">What&apos;s your biggest challenge?</label>
+        <textarea rows={4} value={formData.message} onChange={(e) => set("message", e.target.value)} className={`${inputCls} resize-none`} placeholder="Tell us what's slowing you down..." />
       </div>
-      <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#0066FF] text-white font-semibold rounded-xl hover:bg-[#1A7FFF] transition-all hover:shadow-[0_0_30px_rgba(0,102,255,0.4)]">
-        <Send className="w-4 h-4" />
-        Send Message
+      {error && (
+        <p className="text-red-400 text-sm">{error}</p>
+      )}
+      <motion.button
+        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+        type="submit"
+        disabled={submitting}
+        className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#0066FF] text-white font-semibold rounded-xl hover:bg-[#1A7FFF] transition-all hover:shadow-[0_0_30px_rgba(0,102,255,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {submitting ? (
+          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+        ) : (
+          <Send className="w-4 h-4" />
+        )}
+        {submitting ? "Sending..." : "Send Message"}
       </motion.button>
       <p className="text-[#8892A4] text-xs text-center">We respond within one business day.</p>
     </form>
@@ -304,6 +405,13 @@ function ContactForm() {
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
 
 export default function SPAPage() {
+  const [selectedTier, setSelectedTier] = useState("");
+
+  const handlePricingCTA = (tierKey: string) => {
+    setSelectedTier(tierKey);
+    setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 50);
+  };
+
   return (
     <div className="bg-[#080D1A]">
 
@@ -639,16 +747,13 @@ export default function SPAPage() {
                   )}
                   <div className="mb-8">
                     <h3 className="text-white font-bold text-xl mb-4" style={{ fontFamily: "var(--font-syne)" }}>{plan.tier}</h3>
-                    <div className="flex items-end gap-1 mb-3">
-                      {plan.enterprise ? (
-                        <span className="text-4xl font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>Custom</span>
-                      ) : (
-                        <>
-                          <span className="text-4xl font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>{plan.price}</span>
-                          <span className="text-[#8892A4] mb-1.5">/mo</span>
-                        </>
-                      )}
+                    <div className="flex items-end gap-1 mb-1">
+                      <span className="text-4xl font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>{plan.price}</span>
+                      {plan.period && <span className="text-[#8892A4] mb-1.5">{plan.period}</span>}
                     </div>
+                    {"subPrice" in plan && plan.subPrice && (
+                      <p className="text-[#8892A4] text-xs mb-3">{plan.subPrice}</p>
+                    )}
                     <p className="text-[#8892A4] text-sm">{plan.description}</p>
                   </div>
                   <ul className="space-y-3 flex-1 mb-8">
@@ -663,7 +768,7 @@ export default function SPAPage() {
                   </ul>
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                    onClick={() => handlePricingCTA(plan.tierKey)}
                     className={`block w-full text-center py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 ${plan.popular ? "bg-[#0066FF] text-white hover:bg-[#1A7FFF] hover:shadow-[0_0_25px_rgba(0,102,255,0.4)]" : "glass border border-white/10 text-white hover:border-white/20"}`}
                   >
                     {plan.cta}
@@ -744,7 +849,7 @@ export default function SPAPage() {
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             <motion.div variants={slideLeftVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <ContactForm />
+              <ContactForm defaultTier={selectedTier} />
             </motion.div>
 
             <motion.div variants={slideRightVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-5">
