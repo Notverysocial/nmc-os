@@ -20,9 +20,9 @@ export default function GlassCard({
   onClick,
 }: GlassCardProps) {
   const glowClasses = {
-    blue: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,102,255,0.2),0_0_40px_rgba(0,102,255,0.08)]",
-    gold: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(212,168,83,0.2)]",
-    none: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.06)]",
+    blue: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(139,92,246,0.2),0_0_40px_rgba(139,92,246,0.08)]",
+    gold: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(139,92,246,0.2),0_0_40px_rgba(139,92,246,0.08)]",
+    none: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(139,92,246,0.1)]",
   };
 
   if (hover) {
