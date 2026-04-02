@@ -58,14 +58,14 @@ function SparklineChart({ data }: { data: number[] }) {
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-20" preserveAspectRatio="none">
       <defs>
         <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#2563EB" stopOpacity="0.3" />
-          <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
+          <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={areaD} fill="url(#chartGrad)" />
-      <path d={pathD} stroke="#3B82F6" strokeWidth="2" fill="none" strokeLinecap="round" />
+      <path d={pathD} stroke="#8B5CF6" strokeWidth="2" fill="none" strokeLinecap="round" />
       {pts.map((pt, i) => (
-        <circle key={i} cx={pt.x} cy={pt.y} r="2.5" fill="#3B82F6" />
+        <circle key={i} cx={pt.x} cy={pt.y} r="2.5" fill="#8B5CF6" />
       ))}
     </svg>
   );
@@ -79,7 +79,7 @@ function StatCard({
   return (
     <div
       className="rounded-2xl p-5 flex flex-col gap-3"
-      style={{ background: "#0D1117", border: "1px solid rgba(30,58,138,0.25)" }}
+      style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}
     >
       <div className="flex items-start justify-between">
         <div
@@ -155,9 +155,9 @@ export default function AdminDashboard() {
 
       {/* Stats grid */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
-        <StatCard label="Total Leads" value={String(totalLeads)} sub="All time" icon={Users} accent="#3B82F6" />
+        <StatCard label="Total Leads" value={String(totalLeads)} sub="All time" icon={Users} accent="#8B5CF6" />
         <StatCard label="New This Week" value={String(newThisWeek)} sub="Last 7 days" icon={TrendingUp} accent="#10B981" />
-        <StatCard label="Conversion Rate" value={`${convRate}%`} sub="Closed Won / Total" icon={BarChart3} accent="#F59E0B" />
+        <StatCard label="Conversion Rate" value={`${convRate}%`} sub="Closed Won / Total" icon={BarChart3} accent="#A78BFA" />
         <StatCard label="MRR" value={`$${mrr.toLocaleString()}`} sub="From closed deals" icon={DollarSign} accent="#8B5CF6" />
       </div>
 
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
         <div className="rounded-2xl p-5" style={{ background: "#0D1117", border: "1px solid rgba(30,58,138,0.25)" }}>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Bot className="w-4 h-4 text-blue-400" />
+              <Bot className="w-4 h-4 text-violet-400" />
               <h2 className="text-sm font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>Active Agents</h2>
             </div>
             <span className="text-xs px-2 py-0.5 rounded-full font-semibold" style={{ background: "rgba(16,185,129,0.1)", color: "#10B981", border: "1px solid rgba(16,185,129,0.2)" }}>
@@ -245,7 +245,7 @@ export default function AdminDashboard() {
             <h2 className="text-sm font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>Lead Activity</h2>
             <p className="text-xs text-slate-500 mt-0.5">New leads per day — last 30 days</p>
           </div>
-          <span className="text-xs text-blue-400 font-medium">{totalLeads} total</span>
+          <span className="text-xs text-violet-400 font-medium">{totalLeads} total</span>
         </div>
         <SparklineChart data={days30} />
         <div className="flex justify-between mt-2 text-xs text-slate-600">
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
         <div className="lg:col-span-3 rounded-2xl p-5" style={{ background: "#0D1117", border: "1px solid rgba(30,58,138,0.25)" }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>Recent Leads</h2>
-            <Link href="/admin/leads" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+            <Link href="/admin/leads" className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1">
               View all <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
@@ -276,7 +276,7 @@ export default function AdminDashboard() {
                 >
                   <div
                     className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-                    style={{ background: "#1A2B50" }}
+                    style={{ background: "rgba(139,92,246,0.15)" }}
                   >
                     {lead.name[0]}
                   </div>
@@ -307,7 +307,7 @@ export default function AdminDashboard() {
         <div className="lg:col-span-2 rounded-2xl p-5" style={{ background: "#0D1117", border: "1px solid rgba(30,58,138,0.25)" }}>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>Pipeline</h2>
-            <Link href="/admin/pipeline" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+            <Link href="/admin/pipeline" className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1">
               Board <ChevronRight className="w-3 h-3" />
             </Link>
           </div>
@@ -334,7 +334,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* System health */}
-          <div className="mt-5 pt-5 border-t space-y-2" style={{ borderColor: "rgba(30,58,138,0.15)" }}>
+          <div className="mt-5 pt-5 border-t space-y-2" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
             <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">System Health</p>
             {[
               { label: "API Response", status: "ok" },

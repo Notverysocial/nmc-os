@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 import GlassCard from "./GlassCard";
+import ParticleField from "./ParticleField";
 import {
   fadeUpVariants,
   staggerContainerVariants,
@@ -81,31 +82,31 @@ const caseStudies = [
     industry: "Staffing & Recruiting",
     company: "Apex Talent Group",
     challenge: "Managing 300+ active placements with spreadsheets. Coordinators losing 4+ hours/day on manual updates.",
-    result: "40% more placements, $180K revenue recovered, 15 hours saved per week.",
+    result: "340% more placements, $180K revenue recovered, 15 hours saved per week.",
     quote: "We went from drowning to thriving. The OS handles what used to take two full-time coordinators.",
     author: "Marcus Thompson, CEO",
-    metrics: [{ v: "40%", l: "More Placements" }, { v: "15 hrs", l: "Saved/Week" }, { v: "$180K", l: "Recovered" }],
-    color: "#0066FF",
+    metrics: [{ v: "340%", l: "More Placements" }, { v: "15 hrs", l: "Saved/Week" }, { v: "$180K", l: "Recovered" }],
+    color: "#8B5CF6",
   },
   {
     industry: "Real Estate",
     company: "Meridian Properties",
     challenge: "Inconsistent content output and no social presence. Lost deals because prospects found no credible online footprint.",
-    result: "3x content output, 285% LinkedIn growth, 2 deals directly attributed to content.",
+    result: "3x listing inquiries, 285% LinkedIn growth, 2 deals directly attributed to content.",
     quote: "Our content now looks like we have a 5-person marketing agency. We have one person and the OS.",
     author: "Priya Sharma, Founder",
-    metrics: [{ v: "3x", l: "Content Output" }, { v: "285%", l: "LinkedIn Growth" }, { v: "2 deals", l: "Attributed" }],
-    color: "#D4A853",
+    metrics: [{ v: "3x", l: "Listing Inquiries" }, { v: "285%", l: "LinkedIn Growth" }, { v: "2 deals", l: "Attributed" }],
+    color: "#A78BFA",
   },
   {
     industry: "E-commerce",
     company: "Brightline Commerce",
     challenge: "Rapid growth creating operational chaos. No unified analytics, CS overwhelmed, decisions made on gut feel.",
-    result: "$200K revenue recovered Q1, 80% of CS tickets automated, 22 hours saved per week.",
+    result: "200% ROAS improvement, 80% of CS tickets automated, 22 hours saved per week.",
     quote: "The analytics dashboard showed us we were leaving $200K on the table every quarter. Fixed in 60 days.",
     author: "James Calloway, COO",
-    metrics: [{ v: "$200K", l: "Revenue Recovered" }, { v: "80%", l: "CS Automated" }, { v: "22 hrs", l: "Saved/Week" }],
-    color: "#0066FF",
+    metrics: [{ v: "200%", l: "ROAS Improvement" }, { v: "80%", l: "CS Automated" }, { v: "22 hrs", l: "Saved/Week" }],
+    color: "#7C3AED",
   },
 ];
 
@@ -199,7 +200,7 @@ function TestimonialSection() {
   const t = testimonials[current];
 
   return (
-    <section id="testimonials" className="section-padding bg-[#0D1424]/40">
+    <section id="testimonials" className="section-padding bg-white/[0.015]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           variants={staggerContainerVariants}
@@ -214,7 +215,7 @@ function TestimonialSection() {
 
         <div className="relative max-w-4xl mx-auto">
           <div className="absolute -top-8 -left-4 opacity-10">
-            <Quote className="w-20 h-20 text-[#0066FF] fill-[#0066FF]" />
+            <Quote className="w-20 h-20 text-[#8B5CF6] fill-[#8B5CF6]" />
           </div>
 
           <AnimatePresence mode="wait">
@@ -227,23 +228,23 @@ function TestimonialSection() {
               className="glass rounded-3xl p-10 md:p-14"
             >
               <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#D4A853] fill-[#D4A853]" />)}
+                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 text-[#8B5CF6] fill-[#8B5CF6]" />)}
               </div>
               <blockquote className="text-white text-xl md:text-2xl leading-relaxed font-light mb-8" style={{ fontFamily: "var(--font-syne)" }}>
                 "{t.quote}"
               </blockquote>
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0066FF] to-[#1A7FFF] flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#8B5CF6] to-[#A78BFA] flex items-center justify-center text-white font-bold text-lg">
                     {t.author[0]}
                   </div>
                   <div>
                     <p className="text-white font-semibold">{t.author}</p>
-                    <p className="text-[#8892A4] text-sm">{t.role}</p>
+                    <p className="text-[#6B7280] text-sm">{t.role}</p>
                   </div>
                 </div>
-                <div className="px-4 py-2 rounded-xl bg-[#0066FF]/10 border border-[#0066FF]/20">
-                  <p className="text-[#6699FF] text-sm font-semibold">{t.metric}</p>
+                <div className="px-4 py-2 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20">
+                  <p className="text-[#A78BFA] text-sm font-semibold">{t.metric}</p>
                 </div>
               </div>
             </motion.div>
@@ -254,7 +255,7 @@ function TestimonialSection() {
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`transition-all duration-300 rounded-full ${i === current ? "w-8 h-2 bg-[#0066FF]" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
+                className={`transition-all duration-300 rounded-full ${i === current ? "w-8 h-2 bg-[#8B5CF6]" : "w-2 h-2 bg-white/20 hover:bg-white/40"}`}
               />
             ))}
           </div>
@@ -272,11 +273,11 @@ function FAQItem({ q, a }: { q: string; a: string }) {
     <div className="border-b border-white/5 cursor-pointer" onClick={() => setOpen(!open)}>
       <div className="flex items-center justify-between py-5">
         <p className="text-white font-medium pr-8">{q}</p>
-        {open ? <ChevronUp className="w-5 h-5 text-[#0066FF] shrink-0" /> : <ChevronDown className="w-5 h-5 text-[#8892A4] shrink-0" />}
+        {open ? <ChevronUp className="w-5 h-5 text-[#8B5CF6] shrink-0" /> : <ChevronDown className="w-5 h-5 text-[#6B7280] shrink-0" />}
       </div>
       {open && (
         <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} transition={{ duration: 0.3 }}>
-          <p className="text-[#8892A4] pb-5 leading-relaxed">{a}</p>
+          <p className="text-[#6B7280] pb-5 leading-relaxed">{a}</p>
         </motion.div>
       )}
     </div>
@@ -325,13 +326,13 @@ function ContactForm({ defaultTier }: { defaultTier?: string }) {
   };
 
   const set = (k: string, v: string) => setFormData((p) => ({ ...p, [k]: v }));
-  const inputCls = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#8892A4] text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors";
+  const inputCls = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-[#6B7280] text-sm focus:outline-none focus:border-[#8B5CF6]/50 transition-colors";
 
   if (submitted) {
     return (
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="glass rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center">
-        <div className="w-16 h-16 rounded-full bg-[#0066FF]/10 border border-[#0066FF]/20 flex items-center justify-center mx-auto mb-6">
-          <CheckCircle2 className="w-8 h-8 text-[#0066FF]" />
+        <div className="w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 className="w-8 h-8 text-[#8B5CF6]" />
         </div>
         <h3 className="text-white font-bold text-2xl mb-3" style={{ fontFamily: "var(--font-syne)" }}>Message Received</h3>
         <p className="text-[#8892A4]">Our team will be in touch within one business day.</p>
@@ -371,10 +372,10 @@ function ContactForm({ defaultTier }: { defaultTier?: string }) {
           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-[#0066FF]/50 transition-colors appearance-none cursor-pointer"
           style={{ color: formData.tier_interest ? "#fff" : "#8892A4" }}
         >
-          <option value="" disabled style={{ background: "#0D1424", color: "#8892A4" }}>Select a plan tier...</option>
-          <option value="Foundation" style={{ background: "#0D1424", color: "#fff" }}>Foundation — $499/mo</option>
-          <option value="Growth" style={{ background: "#0D1424", color: "#fff" }}>Growth — $999/mo</option>
-          <option value="Enterprise" style={{ background: "#0D1424", color: "#fff" }}>Enterprise — Custom ($2,500+/mo)</option>
+          <option value="" disabled style={{ background: "#0A0A0B", color: "#6B7280" }}>Select a plan tier...</option>
+          <option value="Foundation" style={{ background: "#0A0A0B", color: "#fff" }}>Foundation — $499/mo</option>
+          <option value="Growth" style={{ background: "#0A0A0B", color: "#fff" }}>Growth — $999/mo</option>
+          <option value="Enterprise" style={{ background: "#0A0A0B", color: "#fff" }}>Enterprise — Custom ($2,500+/mo)</option>
         </select>
       </div>
       <div>
@@ -388,7 +389,7 @@ function ContactForm({ defaultTier }: { defaultTier?: string }) {
         whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
         type="submit"
         disabled={submitting}
-        className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#0066FF] text-white font-semibold rounded-xl hover:bg-[#1A7FFF] transition-all hover:shadow-[0_0_30px_rgba(0,102,255,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2.5 py-4 bg-[#8B5CF6] text-white font-semibold rounded-xl hover:bg-[#A78BFA] transition-all hover:shadow-[0_0_30px_rgba(139,92,246,0.4)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {submitting ? (
           <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -413,21 +414,22 @@ export default function SPAPage() {
   };
 
   return (
-    <div className="bg-[#080D1A]">
+    <div className="bg-[#0A0A0B]">
 
       {/* ══════════════════════════════════════════════════
           1. HERO
       ══════════════════════════════════════════════════ */}
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[#080D1A]" />
-        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="absolute inset-0 bg-[#0A0A0B]" />
+        <div className="absolute inset-0 grid-pattern opacity-20" />
+        <ParticleField density={80} opacity={0.2} color="139,92,246" connectionDistance={130} />
 
         {/* Gradient orbs */}
-        <div className="absolute top-1/4 left-[8%] w-[500px] h-[500px] rounded-full bg-[#0066FF]/12 blur-[120px] pointer-events-none orb-1" />
-        <div className="absolute bottom-1/4 right-[8%] w-[400px] h-[400px] rounded-full bg-[#D4A853]/6 blur-[100px] pointer-events-none orb-2" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#0066FF]/4 blur-[150px] pointer-events-none orb-3" />
+        <div className="absolute top-1/4 left-[8%] w-[500px] h-[500px] rounded-full bg-[#8B5CF6]/8 blur-[120px] pointer-events-none orb-1" />
+        <div className="absolute bottom-1/4 right-[8%] w-[400px] h-[400px] rounded-full bg-[#8B5CF6]/5 blur-[100px] pointer-events-none orb-2" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#8B5CF6]/3 blur-[150px] pointer-events-none orb-3" />
 
-        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#080D1A] to-transparent pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-[#0A0A0B] to-transparent pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-24">
           <motion.div variants={staggerContainerVariants} initial="hidden" animate="visible" className="max-w-4xl">
@@ -437,9 +439,9 @@ export default function SPAPage() {
                 <Sparkles className="w-3 h-3" />
                 AI-Powered Business Operations
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4A853]/10 border border-[#D4A853]/25 text-[#D4A853] text-xs font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4A853] animate-pulse" />
-                3 spots left this month
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/25 text-[#A78BFA] text-xs font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse" />
+                3 spots available this month
               </div>
             </motion.div>
 
@@ -469,7 +471,7 @@ export default function SPAPage() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="flex items-center gap-2.5 px-7 py-4 bg-[#0066FF] text-white font-semibold rounded-xl hover:bg-[#1A7FFF] transition-all hover:shadow-[0_0_40px_rgba(0,102,255,0.35)] text-base w-full sm:w-auto justify-center"
+                className="flex items-center gap-2.5 px-7 py-4 bg-[#8B5CF6] text-white font-semibold rounded-xl hover:bg-[#A78BFA] transition-all hover:shadow-[0_0_40px_rgba(139,92,246,0.35)] text-base w-full sm:w-auto justify-center"
               >
                 <Calendar className="w-5 h-5" />
                 Book a Free Strategy Call
@@ -480,17 +482,17 @@ export default function SPAPage() {
                 onClick={() => document.getElementById("case-studies")?.scrollIntoView({ behavior: "smooth" })}
                 className="flex items-center gap-2.5 px-7 py-4 glass border border-white/10 text-white font-semibold rounded-xl hover:border-white/20 transition-all text-base group w-full sm:w-auto justify-center"
               >
-                <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#0066FF]/30 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#8B5CF6]/30 transition-colors">
                   <Play className="w-3.5 h-3.5 fill-white" />
                 </div>
                 See Client Results
               </motion.button>
             </motion.div>
 
-            <motion.div variants={staggerItemVariants} className="flex items-center gap-6 mt-10 text-sm text-[#8892A4] flex-wrap">
+            <motion.div variants={staggerItemVariants} className="flex items-center gap-6 mt-10 text-sm text-[#6B7280] flex-wrap">
               {["Free 30-min strategy call", "Custom-built in 30 days", "ROI guaranteed in 60 days"].map((item) => (
                 <div key={item} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#0066FF]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#8B5CF6]" />
                   {item}
                 </div>
               ))}
@@ -522,7 +524,7 @@ export default function SPAPage() {
                     </div>
                     <p className="text-white font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>{item.value}</p>
                     <div className="mt-1 h-1 bg-white/5 rounded-full overflow-hidden">
-                      <motion.div initial={{ width: 0 }} animate={{ width: "75%" }} transition={{ delay: 1.2, duration: 1 }} className="h-full bg-[#0066FF] rounded-full" />
+                      <motion.div initial={{ width: 0 }} animate={{ width: "75%" }} transition={{ delay: 1.2, duration: 1 }} className="h-full bg-[#8B5CF6] rounded-full" />
                     </div>
                   </div>
                 ))}
@@ -530,13 +532,13 @@ export default function SPAPage() {
             </div>
           </motion.div>
         </div>
-        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#080D1A] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#0A0A0B] to-transparent pointer-events-none" />
       </section>
 
       {/* ══════════════════════════════════════════════════
           STATS BAR
       ══════════════════════════════════════════════════ */}
-      <section className="py-20 border-y border-white/5 bg-[#0D1424]/50">
+      <section className="py-20 border-y border-white/5 bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map(({ value, suffix, label }) => (
@@ -552,6 +554,40 @@ export default function SPAPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
+          LIVE AGENT ACTIVITY TICKER
+      ══════════════════════════════════════════════════ */}
+      <section className="py-8 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="glass rounded-2xl p-5 flex items-start gap-4">
+            <div className="flex items-center gap-2 shrink-0 pt-0.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[#6B7280] text-xs font-semibold uppercase tracking-widest">Live</span>
+            </div>
+            <div className="overflow-hidden flex-1">
+              <div className="flex gap-8 animate-[marquee_32s_linear_infinite]">
+                {[
+                  { msg: "Lead Scout identified 14 new prospects in Miami", time: "2m ago" },
+                  { msg: "Content Writer published: \"5 Hiring Trends for Q2\"", time: "12m ago" },
+                  { msg: "Intelligence Desk compiled morning brief", time: "1h ago" },
+                  { msg: "Outreach Agent sent 23 follow-up sequences", time: "3h ago" },
+                  { msg: "Lead Scout identified 14 new prospects in Miami", time: "2m ago" },
+                  { msg: "Content Writer published: \"5 Hiring Trends for Q2\"", time: "12m ago" },
+                  { msg: "Intelligence Desk compiled morning brief", time: "1h ago" },
+                  { msg: "Outreach Agent sent 23 follow-up sequences", time: "3h ago" },
+                ].map((item, i) => (
+                  <div key={i} className="shrink-0 flex items-center gap-3">
+                    <span className="text-[#FAFAF9] text-sm font-mono">{item.msg}</span>
+                    <span className="text-[#6B7280] text-xs font-mono">— {item.time}</span>
+                    <span className="text-[#8B5CF6]/40 mx-2">|</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
           2. TRUSTED BY
       ══════════════════════════════════════════════════ */}
       <section className="py-16 overflow-hidden border-b border-white/5">
@@ -559,13 +595,13 @@ export default function SPAPage() {
           <p className="text-[#8892A4] text-sm font-medium tracking-[0.12em] uppercase">Trusted by growth-stage companies</p>
         </div>
         <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#080D1A] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#080D1A] to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0A0A0B] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0B] to-transparent z-10" />
           <div className="flex gap-12 animate-[marquee_25s_linear_infinite]">
             {trustedLogos.map((logo, i) => (
               <div key={i} className="shrink-0 px-6 py-3 glass rounded-xl border border-white/06 flex items-center gap-2">
-                <div className="w-5 h-5 rounded bg-[#0066FF]/20 flex items-center justify-center">
-                  <Zap className="w-2.5 h-2.5 text-[#0066FF]" />
+                <div className="w-5 h-5 rounded bg-[#8B5CF6]/20 flex items-center justify-center">
+                  <Zap className="w-2.5 h-2.5 text-[#8B5CF6]" />
                 </div>
                 <span className="text-[#8892A4] text-sm font-medium whitespace-nowrap">{logo}</span>
               </div>
@@ -587,13 +623,12 @@ export default function SPAPage() {
 
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} className="grid md:grid-cols-3 gap-6">
             {pillars.map((pillar) => {
-              const isGold = pillar.accent === "gold";
-              const c = isGold ? "#D4A853" : "#0066FF";
-              const bg = isGold ? "rgba(212,168,83,0.1)" : "rgba(0,102,255,0.1)";
-              const border = isGold ? "rgba(212,168,83,0.2)" : "rgba(0,102,255,0.2)";
+              const c = "#8B5CF6";
+              const bg = "rgba(139,92,246,0.1)";
+              const border = "rgba(139,92,246,0.2)";
               return (
                 <motion.div key={pillar.title} variants={staggerItemVariants}>
-                  <motion.div variants={cardHoverVariants} initial="rest" whileHover="hover" className="glass rounded-2xl p-6 group transition-all duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,102,255,0.15)] h-full">
+                  <motion.div variants={cardHoverVariants} initial="rest" whileHover="hover" className="glass rounded-2xl p-6 group transition-all duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_40px_rgba(139,92,246,0.08),0_0_0_1px_rgba(139,92,246,0.15)] h-full">
                     <div className="mb-4">
                       <span className="badge text-xs font-semibold" style={{ background: bg, border: `1px solid ${border}`, color: c }}>{pillar.badge}</span>
                     </div>
@@ -612,9 +647,48 @@ export default function SPAPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
+          WHAT MAKES US DIFFERENT
+      ══════════════════════════════════════════════════ */}
+      <section className="section-padding bg-white/[0.015]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="mb-16">
+            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Our Edge</motion.p>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white">What Makes Us Different</motion.h2>
+          </motion.div>
+
+          <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-0 divide-y divide-white/[0.04]">
+            {[
+              { n: "01", title: "We don't sell software. We install a workforce.", body: "Every OS comes with active AI agents that work your pipeline, write your content, and run your ops — daily." },
+              { n: "02", title: "Bespoke, not boxed.", body: "No templates. No generic dashboards. Your OS is built from your workflows, your brand, your data." },
+              { n: "03", title: "It gets better every month.", body: "Dedicated growth partners review your metrics monthly and tune the system. You don't have to manage it." },
+              { n: "04", title: "One place to make money.", body: "CRM, content, invoicing, analytics, scheduling — unified. No more duct-tape stacks." },
+              { n: "05", title: "Your data stays yours.", body: "We don't host your data in black boxes or lock you in. Export everything, anytime." },
+            ].map((item, i) => (
+              <motion.div key={item.n} variants={staggerItemVariants}>
+                <motion.div
+                  whileHover={{ x: 8 }}
+                  transition={{ duration: 0.2 }}
+                  className="py-8 flex items-start gap-8 group cursor-default"
+                >
+                  <span className="text-[4rem] font-bold leading-none text-[#8B5CF6]/15 group-hover:text-[#8B5CF6]/30 transition-colors duration-300 shrink-0 w-24 text-right" style={{ fontFamily: "var(--font-syne)" }}>{item.n}</span>
+                  <div className="flex-1 pt-2">
+                    <h3 className="text-white text-xl font-bold mb-2 group-hover:text-[#A78BFA] transition-colors duration-300" style={{ fontFamily: "var(--font-syne)" }}>{item.title}</h3>
+                    <p className="text-[#6B7280] leading-relaxed">{item.body}</p>
+                  </div>
+                  <div className="shrink-0 pt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ChevronRight className="w-5 h-5 text-[#8B5CF6]" />
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
           4. HOW IT WORKS
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding bg-[#0D1424]/40">
+      <section className="section-padding bg-white/[0.015]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
             <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">The Process</motion.p>
@@ -624,9 +698,9 @@ export default function SPAPage() {
 
           <div className="relative">
             <div className="hidden md:block absolute top-12 left-[16.67%] right-[16.67%] h-px">
-              <div className="h-full bg-gradient-to-r from-[#0066FF]/30 via-[#0066FF]/60 to-[#0066FF]/30" />
-              <div className="absolute left-1/3 -top-1 w-2 h-2 rounded-full bg-[#0066FF]" />
-              <div className="absolute right-1/3 -top-1 w-2 h-2 rounded-full bg-[#0066FF]" />
+              <div className="h-full bg-gradient-to-r from-[#8B5CF6]/30 via-[#8B5CF6]/60 to-[#8B5CF6]/30" />
+              <div className="absolute left-1/3 -top-1 w-2 h-2 rounded-full bg-[#8B5CF6]" />
+              <div className="absolute right-1/3 -top-1 w-2 h-2 rounded-full bg-[#8B5CF6]" />
             </div>
 
             <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-3 gap-8">
@@ -634,10 +708,10 @@ export default function SPAPage() {
                 <motion.div key={step.step} variants={staggerItemVariants}>
                   <GlassCard className="p-8 h-full" glowColor="blue">
                     <div className="flex items-start gap-4 mb-6">
-                      <div className="w-12 h-12 rounded-xl bg-[#0066FF]/10 border border-[#0066FF]/20 flex items-center justify-center shrink-0">
-                        <div className="text-[#0066FF]">{step.icon}</div>
+                      <div className="w-12 h-12 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center shrink-0">
+                        <div className="text-[#8B5CF6]">{step.icon}</div>
                       </div>
-                      <span className="text-5xl font-bold text-[#0D1E3D] leading-none" style={{ fontFamily: "var(--font-syne)" }}>{step.step}</span>
+                      <span className="text-5xl font-bold text-[#8B5CF6]/10 leading-none" style={{ fontFamily: "var(--font-syne)" }}>{step.step}</span>
                     </div>
                     <h3 className="text-white font-bold text-xl mb-3" style={{ fontFamily: "var(--font-syne)" }}>{step.title}</h3>
                     <p className="text-[#8892A4] leading-relaxed text-sm">{step.description}</p>
@@ -664,13 +738,13 @@ export default function SPAPage() {
             {bentoFeatures.map((feature) => (
               <motion.div key={feature.title} variants={staggerItemVariants} className={feature.wide ? "md:col-span-2" : ""}>
                 <GlassCard className="p-7 h-full group relative overflow-hidden min-h-[180px]" glowColor="blue">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#0066FF]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="w-10 h-10 rounded-lg bg-[#0066FF]/10 border border-[#0066FF]/20 flex items-center justify-center mb-4 text-[#0066FF] group-hover:scale-110 transition-transform duration-300">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#8B5CF6]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="w-10 h-10 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center mb-4 text-[#8B5CF6] group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
                   <h3 className="text-white font-bold text-lg mb-2" style={{ fontFamily: "var(--font-syne)" }}>{feature.title}</h3>
                   <p className="text-[#8892A4] text-sm leading-relaxed">{feature.description}</p>
-                  <div className="mt-4 flex items-center gap-1 text-[#0066FF] text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="mt-4 flex items-center gap-1 text-[#8B5CF6] text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     Learn more <ChevronRight className="w-3 h-3" />
                   </div>
                 </GlassCard>
@@ -683,7 +757,7 @@ export default function SPAPage() {
       {/* ══════════════════════════════════════════════════
           6. CASE STUDIES
       ══════════════════════════════════════════════════ */}
-      <section id="case-studies" className="section-padding bg-[#0D1424]/40">
+      <section id="case-studies" className="section-padding bg-white/[0.015]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
             <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Proof of Impact</motion.p>
@@ -720,6 +794,49 @@ export default function SPAPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
+          YOUR FIRST 30 DAYS
+      ══════════════════════════════════════════════════ */}
+      <section className="section-padding">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+          <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
+            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Onboarding</motion.p>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white">Your First 30 Days</motion.h2>
+            <motion.p variants={staggerItemVariants} className="text-[#6B7280] text-lg mt-4 max-w-xl mx-auto">From first call to fully operational — here's exactly what happens.</motion.p>
+          </motion.div>
+
+          <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="relative">
+            {/* Connecting line */}
+            <div className="absolute top-8 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[#8B5CF6]/30 to-transparent hidden md:block" />
+
+            <div className="grid md:grid-cols-4 gap-6">
+              {[
+                { day: "Days 1–3", title: "Discovery", desc: "We map every workflow, tool, and bottleneck in your business.", icon: "01" },
+                { day: "Days 4–14", title: "Build", desc: "Your OS is built from scratch — branded, integrated, trained on your data.", icon: "02" },
+                { day: "Days 15–25", title: "Launch", desc: "Hands-on onboarding, team training, and agents go live.", icon: "03" },
+                { day: "Day 30+", title: "Optimize", desc: "Monthly reviews, continuous tuning, and system improvements.", icon: "04" },
+              ].map((item, i) => (
+                <motion.div key={item.title} variants={staggerItemVariants} className="relative">
+                  <div className="glass rounded-2xl p-6 text-center hover:shadow-[0_0_40px_rgba(139,92,246,0.08)] transition-all duration-300 group">
+                    <div className="w-16 h-16 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-[#8B5CF6]/20 transition-colors duration-300">
+                      <span className="text-[#8B5CF6] font-bold text-lg" style={{ fontFamily: "var(--font-syne)" }}>{item.icon}</span>
+                    </div>
+                    <p className="text-[#6B7280] text-xs font-semibold uppercase tracking-widest mb-2">{item.day}</p>
+                    <h3 className="text-white font-bold text-lg mb-2" style={{ fontFamily: "var(--font-syne)" }}>{item.title}</h3>
+                    <p className="text-[#6B7280] text-sm leading-relaxed">{item.desc}</p>
+                    {i < 3 && (
+                      <div className="absolute -right-3 top-8 hidden md:flex items-center justify-center z-10">
+                        <ChevronRight className="w-5 h-5 text-[#8B5CF6]/40" />
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
           7. PRICING
       ══════════════════════════════════════════════════ */}
       <section id="pricing" className="section-padding">
@@ -735,11 +852,11 @@ export default function SPAPage() {
               <motion.div key={plan.tier} variants={staggerItemVariants}>
                 <motion.div
                   variants={cardHoverVariants} initial="rest" whileHover="hover"
-                  className={`relative rounded-2xl p-8 transition-all duration-300 flex flex-col h-full ${plan.popular ? "bg-gradient-to-b from-[#0D1E3D] to-[#0D1424] border border-[#0066FF]/30 shadow-[0_0_60px_rgba(0,102,255,0.15)]" : "glass"}`}
+                  className={`relative rounded-2xl p-8 transition-all duration-300 flex flex-col h-full ${plan.popular ? "bg-[rgba(139,92,246,0.05)] border border-[#8B5CF6]/30 shadow-[0_0_60px_rgba(139,92,246,0.15)]" : "glass"}`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <div className="flex items-center gap-1.5 px-4 py-1.5 bg-[#0066FF] text-white text-xs font-bold rounded-full tracking-wide uppercase">
+                      <div className="flex items-center gap-1.5 px-4 py-1.5 bg-[#8B5CF6] text-white text-xs font-bold rounded-full tracking-wide uppercase">
                         <Zap className="w-3 h-3 fill-white" />
                         Most Popular
                       </div>
@@ -759,8 +876,8 @@ export default function SPAPage() {
                   <ul className="space-y-3 flex-1 mb-8">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-3">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.popular ? "bg-[#0066FF]/20 border border-[#0066FF]/30" : "bg-white/5 border border-white/10"}`}>
-                          <Check className={`w-3 h-3 ${plan.popular ? "text-[#0066FF]" : "text-[#8892A4]"}`} />
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.popular ? "bg-[#8B5CF6]/20 border border-[#8B5CF6]/30" : "bg-white/5 border border-white/10"}`}>
+                          <Check className={`w-3 h-3 ${plan.popular ? "text-[#8B5CF6]" : "text-[#6B7280]"}`} />
                         </div>
                         <span className="text-[#B8C4D4] text-sm">{feature}</span>
                       </li>
@@ -769,7 +886,7 @@ export default function SPAPage() {
                   <motion.button
                     whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                     onClick={() => handlePricingCTA(plan.tierKey)}
-                    className={`block w-full text-center py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 ${plan.popular ? "bg-[#0066FF] text-white hover:bg-[#1A7FFF] hover:shadow-[0_0_25px_rgba(0,102,255,0.4)]" : "glass border border-white/10 text-white hover:border-white/20"}`}
+                    className={`block w-full text-center py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 ${plan.popular ? "bg-[#8B5CF6] text-white hover:bg-[#A78BFA] hover:shadow-[0_0_25px_rgba(139,92,246,0.4)]" : "glass border border-white/10 text-white hover:border-[#8B5CF6]/30"}`}
                   >
                     {plan.cta}
                   </motion.button>
@@ -808,13 +925,13 @@ export default function SPAPage() {
               <p className="text-[#8892A4] leading-relaxed mb-5">
                 The difference between a good business and a great one isn't the idea — it's the infrastructure. The systems that run quietly in the background, making sure nothing slips and every opportunity is captured.
               </p>
-              <p className="text-[#D4A853] font-medium">That's the new mindset. And it changes everything.</p>
+              <p className="text-[#A78BFA] font-medium">That's the new mindset. And it changes everything.</p>
             </motion.div>
 
             <motion.div variants={slideRightVariants} className="grid grid-cols-2 gap-4">
               {values.map((value) => (
                 <GlassCard key={value.title} className="p-5" glowColor="blue">
-                  <div className="w-9 h-9 rounded-xl bg-[#0066FF]/10 border border-[#0066FF]/20 flex items-center justify-center mb-3 text-[#0066FF]">{value.icon}</div>
+                  <div className="w-9 h-9 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center mb-3 text-[#8B5CF6]">{value.icon}</div>
                   <h3 className="text-white font-bold text-sm mb-2" style={{ fontFamily: "var(--font-syne)" }}>{value.title}</h3>
                   <p className="text-[#8892A4] text-xs leading-relaxed">{value.description}</p>
                 </GlassCard>
@@ -824,8 +941,8 @@ export default function SPAPage() {
 
           {/* NBC Partnership */}
           <motion.div variants={fadeUpVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="glass rounded-2xl p-8 text-center max-w-2xl mx-auto">
-            <div className="w-10 h-10 rounded-xl bg-[#D4A853]/10 border border-[#D4A853]/20 flex items-center justify-center mx-auto mb-4">
-              <Award className="w-5 h-5 text-[#D4A853]" />
+            <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center mx-auto mb-4">
+              <Award className="w-5 h-5 text-[#8B5CF6]" />
             </div>
             <h3 className="text-white font-bold text-xl mb-3" style={{ fontFamily: "var(--font-syne)" }}>Powered by NBC Studio</h3>
             <p className="text-[#8892A4] text-sm leading-relaxed">
@@ -838,12 +955,12 @@ export default function SPAPage() {
       {/* ══════════════════════════════════════════════════
           10. CONTACT / CTA
       ══════════════════════════════════════════════════ */}
-      <section id="contact" className="section-padding bg-[#0D1424]/40 relative overflow-hidden">
-        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#0066FF]/5 blur-[120px] pointer-events-none" />
+      <section id="contact" className="section-padding bg-white/[0.015] relative overflow-hidden">
+        <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#8B5CF6]/5 blur-[120px] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
             <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Let's Talk</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Ready to Transform <span className="gradient-text-gold">Your Business?</span></motion.h2>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Ready to Transform <span className="gradient-text-blue">Your Business?</span></motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#8892A4] text-lg max-w-xl mx-auto">Tell us about your business and we'll show you exactly what your custom OS would look like.</motion.p>
           </motion.div>
 
@@ -853,10 +970,10 @@ export default function SPAPage() {
             </motion.div>
 
             <motion.div variants={slideRightVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-5">
-              <div className="glass rounded-2xl p-7 border border-[#0066FF]/15">
+              <div className="glass rounded-2xl p-7 border border-[#8B5CF6]/15">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#0066FF]/10 border border-[#0066FF]/20 flex items-center justify-center">
-                    <Calendar className="w-5 h-5 text-[#0066FF]" />
+                  <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center">
+                    <Calendar className="w-5 h-5 text-[#8B5CF6]" />
                   </div>
                   <div>
                     <h3 className="text-white font-semibold" style={{ fontFamily: "var(--font-syne)" }}>Book a Strategy Call</h3>
@@ -866,10 +983,10 @@ export default function SPAPage() {
                 <p className="text-[#8892A4] text-sm mb-4">Skip the back-and-forth. Book directly and come ready to talk operations.</p>
                 <div className="aspect-[4/3] glass-strong rounded-xl flex items-center justify-center border border-white/5">
                   <div className="text-center p-6">
-                    <Calendar className="w-10 h-10 text-[#0066FF]/40 mx-auto mb-3" />
+                    <Calendar className="w-10 h-10 text-[#8B5CF6]/40 mx-auto mb-3" />
                     <p className="text-[#8892A4] text-sm font-medium mb-1">Calendly Booking</p>
                     <p className="text-[#8892A4] text-xs mb-4">Select a time that works for you</p>
-                    <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0066FF] text-white text-sm font-semibold rounded-lg hover:bg-[#1A7FFF] transition-colors cursor-pointer">
+                    <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#8B5CF6] text-white text-sm font-semibold rounded-lg hover:bg-[#A78BFA] transition-colors cursor-pointer">
                       Open Calendar <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
@@ -883,7 +1000,7 @@ export default function SPAPage() {
                   { icon: <MapPin className="w-4 h-4" />, label: "Location", value: "Remote-first, US-based team" },
                 ].map(({ icon, label, value }) => (
                   <div key={label} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#0066FF]/10 border border-[#0066FF]/15 flex items-center justify-center text-[#0066FF] shrink-0">{icon}</div>
+                    <div className="w-8 h-8 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/15 flex items-center justify-center text-[#8B5CF6] shrink-0">{icon}</div>
                     <div>
                       <p className="text-[#8892A4] text-xs mb-0.5">{label}</p>
                       <p className="text-white text-sm">{value}</p>
@@ -892,12 +1009,12 @@ export default function SPAPage() {
                 ))}
               </div>
 
-              <div className="glass rounded-2xl p-5 border border-[#D4A853]/10">
+              <div className="glass rounded-2xl p-5 border border-[#8B5CF6]/10">
                 <div className="flex items-center gap-2 mb-1">
-                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-white text-sm font-semibold">We're responsive</span>
                 </div>
-                <p className="text-[#8892A4] text-sm">Average response: <span className="text-[#D4A853] font-medium">under 4 hours</span></p>
+                <p className="text-[#6B7280] text-sm">Average response: <span className="text-[#A78BFA] font-medium">under 4 hours</span></p>
               </div>
             </motion.div>
           </div>
