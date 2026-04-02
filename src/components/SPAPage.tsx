@@ -422,6 +422,7 @@ export default function SPAPage() {
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-[#0A0A0B]" />
         <ParticleField density={50} opacity={0.18} color="139, 92, 246" />
+        <div className="hero-glow" />
         <div className="absolute inset-0 grid-pattern opacity-20" />
 
         {/* Gradient orbs */}
@@ -599,6 +600,7 @@ export default function SPAPage() {
         </div>
       </section>
 
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[rgba(26,43,80,0.3)] to-transparent" />
       {/* ══════════════════════════════════════════════════
           4. AGITATION SECTION
       ══════════════════════════════════════════════════ */}
@@ -681,6 +683,7 @@ export default function SPAPage() {
         </div>
       </section>
 
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[rgba(26,43,80,0.3)] to-transparent" />
       {/* ══════════════════════════════════════════════════
           5. SOLUTION INTRO
       ══════════════════════════════════════════════════ */}
@@ -848,6 +851,7 @@ export default function SPAPage() {
         </div>
       </section>
 
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[rgba(26,43,80,0.3)] to-transparent" />
       {/* ══════════════════════════════════════════════════
           6. CASE STUDIES
       ══════════════════════════════════════════════════ */}
@@ -925,6 +929,7 @@ export default function SPAPage() {
         </div>
       </section>
 
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[rgba(26,43,80,0.3)] to-transparent" />
       {/* ══════════════════════════════════════════════════
           7. PRICING
       ══════════════════════════════════════════════════ */}
@@ -994,6 +999,7 @@ export default function SPAPage() {
         </div>
       </section>
 
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-[rgba(26,43,80,0.3)] to-transparent" />
       {/* ══════════════════════════════════════════════════
           8. TESTIMONIALS
       ══════════════════════════════════════════════════ */}

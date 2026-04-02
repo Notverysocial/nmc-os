@@ -3,6 +3,8 @@ import { DM_Sans, Syne, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import RootLayoutShell from "@/components/RootLayoutShell";
 import GrainOverlay from "@/components/GrainOverlay";
+import ScanLines from "@/components/ScanLines";
+import CursorGlow from "@/components/CursorGlow";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -46,6 +48,8 @@ export default function RootLayout({
     <html lang="en" className={`${dmSans.variable} ${syne.variable} ${playfair.variable}`}>
       <body style={{ backgroundColor: "#0A0A0B" }}>
         <GrainOverlay />
+        <ScanLines />
+        <CursorGlow />
         <RootLayoutShell>{children}</RootLayoutShell>
       </body>
     </html>
