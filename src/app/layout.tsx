@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { DM_Sans, Syne, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import RootLayoutShell from "@/components/RootLayoutShell";
 import GrainOverlay from "@/components/GrainOverlay";
@@ -14,6 +14,13 @@ const syne = Syne({
   subsets: ["latin"],
   variable: "--font-syne",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${syne.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${syne.variable} ${playfair.variable}`}>
       <body style={{ backgroundColor: "#0A0A0B" }}>
         <GrainOverlay />
         <RootLayoutShell>{children}</RootLayoutShell>

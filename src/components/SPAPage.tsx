@@ -209,8 +209,8 @@ function TestimonialSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Client Results</motion.p>
-          <motion.h2 variants={staggerItemVariants} className="display-lg text-white">Proof That It Works</motion.h2>
+          <motion.span variants={staggerItemVariants} className="section-pill">What People Are Saying</motion.span>
+          <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2">Loved by operators.</motion.h2>
         </motion.div>
 
         <div className="relative max-w-4xl mx-auto">
@@ -458,12 +458,8 @@ export default function SPAPage() {
               </span>
             </motion.h1>
 
-            <motion.p variants={staggerItemVariants} className="text-[#A1A1AA] text-xl leading-relaxed max-w-2xl mb-4">
-              NMC builds a custom AI-powered operating system for your business — so you stop managing chaos and start scaling with precision.
-            </motion.p>
-
-            <motion.p variants={staggerItemVariants} className="text-[#71717A] text-base leading-relaxed max-w-xl mb-10">
-              We configure everything from your CRM and content engine to your invoicing and analytics. You get one platform, built for your business, running on day one.
+            <motion.p variants={staggerItemVariants} className="text-[#A1A1AA] text-xl leading-relaxed max-w-2xl mb-10">
+              Custom AI agents that run your operations while you focus on growth.
             </motion.p>
 
             <motion.div variants={staggerItemVariants} className="flex flex-col sm:flex-row items-start gap-4">
@@ -474,18 +470,16 @@ export default function SPAPage() {
                 className="flex items-center gap-2.5 px-7 py-4 bg-[#8B5CF6] text-white font-semibold rounded-xl hover:bg-[#7C3AED] transition-all hover:shadow-[0_0_40px_rgba(139,92,246,0.35)] text-base w-full sm:w-auto justify-center"
               >
                 <Calendar className="w-5 h-5" />
-                Book a Free Strategy Call
+                Book a Strategy Call
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => document.getElementById("case-studies")?.scrollIntoView({ behavior: "smooth" })}
-                className="flex items-center gap-2.5 px-7 py-4 glass border border-white/10 text-white font-semibold rounded-xl hover:border-white/20 transition-all text-base group w-full sm:w-auto justify-center"
+                onClick={() => document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" })}
+                className="flex items-center gap-2.5 px-7 py-4 border border-white/15 text-white font-semibold rounded-xl hover:border-white/30 hover:bg-white/5 transition-all text-base w-full sm:w-auto justify-center"
               >
-                <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#8B5CF6]/30 transition-colors">
-                  <Play className="w-3.5 h-3.5 fill-white" />
-                </div>
-                See Client Results
+                See How It Works
+                <ArrowRight className="w-4 h-4" />
               </motion.button>
             </motion.div>
 
@@ -566,43 +560,148 @@ export default function SPAPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          STATS BAR
+          3. PROBLEM SECTION
       ══════════════════════════════════════════════════ */}
-      <section className="py-20 border-y border-white/5 bg-[#0F0F10]/50">
+      <section className="section-cream section-padding">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map(({ value, suffix, label }) => (
-              <motion.div key={label} variants={staggerItemVariants} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-syne)" }}>
-                  <AnimatedCounter end={value} suffix={suffix} />
-                </div>
-                <p className="text-[#71717A] text-sm">{label}</p>
-              </motion.div>
-            ))}
+          <motion.div
+            variants={staggerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-3xl"
+          >
+            <motion.span variants={staggerItemVariants} className="section-pill">The Problem</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-[#111] mb-12">
+              You&apos;re Running Your Business<br />on Duct Tape.
+            </motion.h2>
+            <div className="space-y-6">
+              {[
+                "Five tabs open. A CRM you hate.",
+                "A spreadsheet tracking leads that's three weeks out of date.",
+                "You're the bottleneck on every decision.",
+                "Your team asks you the same questions every day.",
+                "You spend more time managing tools than managing growth.",
+              ].map((pain, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.15, duration: 0.5, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                  className="text-lg text-[#71717A]"
+                >
+                  {pain}
+                </motion.p>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          2. TRUSTED BY
+          4. AGITATION SECTION
       ══════════════════════════════════════════════════ */}
-      <section className="py-16 overflow-hidden border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center mb-8">
-          <p className="text-[#71717A] text-sm font-medium tracking-[0.12em] uppercase">Trusted by growth-stage companies</p>
+      <section className="section-cream section-padding border-t border-black/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            variants={staggerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-16"
+          >
+            <motion.span variants={staggerItemVariants} className="section-pill">The Cost of Waiting</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-[#111] mt-2">
+              Every Day You Wait,<br />Your Competitors Get Smarter.
+            </motion.h2>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-px bg-black/10 rounded-2xl overflow-hidden"
+          >
+            {/* Without */}
+            <div className="bg-[#F2EFE9] p-10 md:p-14">
+              <p className="text-xs font-mono tracking-[0.15em] uppercase text-[#9CA3AF] mb-8">Without the OS</p>
+              <ul className="space-y-5">
+                {[
+                  "Manual follow-ups that slip through cracks",
+                  "Leads going cold while you're busy",
+                  "No visibility into what's working",
+                  "Decisions based on gut, not data",
+                ].map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-start gap-3"
+                  >
+                    <span className="mt-1.5 w-4 h-4 rounded-full border border-[#D1C5B8] shrink-0 flex items-center justify-center">
+                      <X className="w-2.5 h-2.5 text-[#C4A882]" />
+                    </span>
+                    <span className="text-[#71717A] text-base">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            {/* With */}
+            <div className="bg-[#FAF8F5] p-10 md:p-14">
+              <p className="text-xs font-mono tracking-[0.15em] uppercase text-[#8B5CF6] mb-8">With the OS</p>
+              <ul className="space-y-5">
+                {[
+                  "Agents follow up instantly, 24/7",
+                  "Every lead scored, nurtured, tracked",
+                  "Real-time dashboard with actionable intelligence",
+                  "AI briefs every morning with data-driven recommendations",
+                ].map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: i * 0.1 + 0.2 }}
+                    viewport={{ once: true }}
+                    className="flex items-start gap-3"
+                  >
+                    <span className="mt-1.5 w-4 h-4 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/30 shrink-0 flex items-center justify-center">
+                      <Check className="w-2.5 h-2.5 text-[#8B5CF6]" />
+                    </span>
+                    <span className="text-[#374151] text-base font-medium">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
         </div>
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0A0A0B] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0B] to-transparent z-10" />
-          <div className="flex gap-12 animate-[marquee_25s_linear_infinite]">
-            {trustedLogos.map((logo, i) => (
-              <div key={i} className="shrink-0 px-6 py-3 glass rounded-xl border border-white/06 flex items-center gap-2">
-                <div className="w-5 h-5 rounded bg-[#8B5CF6]/20 flex items-center justify-center">
-                  <Zap className="w-2.5 h-2.5 text-[#8B5CF6]" />
-                </div>
-                <span className="text-[#71717A] text-sm font-medium whitespace-nowrap">{logo}</span>
-              </div>
-            ))}
-          </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          5. SOLUTION INTRO
+      ══════════════════════════════════════════════════ */}
+      <section className="section-padding bg-[#0A0A0B] relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-[#8B5CF6]/8 blur-[120px] pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <motion.div
+            variants={staggerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <motion.span variants={staggerItemVariants} className="section-pill">The Solution</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-6 max-w-4xl mx-auto">
+              One System. Built for Your Business.<br />Powered by Agents That Work.
+            </motion.h2>
+            <motion.p variants={staggerItemVariants} className="text-[#71717A] text-xl leading-relaxed max-w-2xl mx-auto">
+              Not another tool to learn. A custom-configured digital operations team that runs your business from day one.
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
@@ -612,8 +711,8 @@ export default function SPAPage() {
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-gold inline-flex mb-4">The Platform</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Everything Your Business Needs</motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">The Platform</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">Everything Your Business Needs</motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-2xl mx-auto">Three core pillars that transform how you operate, grow, and compete — all in one custom-built platform.</motion.p>
           </motion.div>
 
@@ -649,8 +748,8 @@ export default function SPAPage() {
       <section className="section-padding bg-[#0F0F10]/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Why NMC</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white max-w-2xl">What Makes Us<br /><span className="gradient-text-violet">Different</span></motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">Why Us</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white max-w-2xl mt-2">What Makes Us<br /><span className="gradient-text-violet">Different</span></motion.h2>
           </motion.div>
 
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-px">
@@ -681,13 +780,13 @@ export default function SPAPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          4. HOW IT WORKS
+          HOW IT WORKS
       ══════════════════════════════════════════════════ */}
-      <section className="section-padding bg-[#0F0F10]/40">
+      <section id="how-it-works" className="section-padding bg-[#0F0F10]/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">The Process</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">From Chaos to Clarity in 90 Days</motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">How It Works</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">From Chaos to Clarity in 90 Days</motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-xl mx-auto">Our proven implementation process gets you fully operational, fast.</motion.p>
           </motion.div>
 
@@ -724,9 +823,9 @@ export default function SPAPage() {
       <section id="features" className="section-padding">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-gold inline-flex mb-4">Capabilities</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Six Systems, One Platform</motion.h2>
-            <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-2xl mx-auto">Every tool you need to run a modern business — built, connected, and customized for you.</motion.p>
+            <motion.span variants={staggerItemVariants} className="section-pill">Features</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">Everything you need to run an autonomous business.</motion.h2>
+            <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-2xl mx-auto">Every tool built, connected, and customized for you — from day one.</motion.p>
           </motion.div>
 
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -755,8 +854,8 @@ export default function SPAPage() {
       <section id="case-studies" className="section-padding bg-[#0F0F10]/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Proof of Impact</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Real Businesses. <span className="gradient-text-blue">Real Results.</span></motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">Industries</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">Real Businesses. <span className="gradient-text-blue">Real Results.</span></motion.h2>
           </motion.div>
 
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid md:grid-cols-3 gap-6">
@@ -794,8 +893,8 @@ export default function SPAPage() {
       <section className="section-padding">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Onboarding</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Your First 30 Days</motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">Onboarding</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">Your First 30 Days</motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-xl mx-auto">From signed contract to fully operational — in four focused weeks.</motion.p>
           </motion.div>
 
@@ -832,8 +931,8 @@ export default function SPAPage() {
       <section id="pricing" className="section-padding">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-gold inline-flex mb-4">Pricing</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Simple, Transparent Pricing</motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">Pricing</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">Simple, Transparent Pricing</motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-xl mx-auto">One flat monthly fee. No hidden costs, no per-seat traps.</motion.p>
           </motion.div>
 
@@ -907,7 +1006,7 @@ export default function SPAPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid lg:grid-cols-2 gap-16 items-center mb-24">
             <motion.div variants={slideLeftVariants}>
-              <p className="badge badge-gold inline-flex mb-6">About NMC</p>
+              <span className="section-pill mb-6">About</span>
               <h2 className="display-md text-white mb-6">Built by Operators, for Operators</h2>
               <p className="text-[#71717A] leading-relaxed mb-5 text-lg">
                 New Mindset Content started as a brand journalism agency. We kept hitting the same wall: our clients had great stories to tell but chaotic operations underneath. So we built the fix.
@@ -949,8 +1048,8 @@ export default function SPAPage() {
         <div className="absolute left-1/4 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#8B5CF6]/5 blur-[120px] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div variants={staggerContainerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center mb-16">
-            <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-4">Let's Talk</motion.p>
-            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">Ready to Transform <span className="gradient-text-gold">Your Business?</span></motion.h2>
+            <motion.span variants={staggerItemVariants} className="section-pill">Get Started</motion.span>
+            <motion.h2 variants={staggerItemVariants} className="display-lg text-white mt-2 mb-4">Ready to Transform <span className="gradient-text-gold">Your Business?</span></motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#71717A] text-lg max-w-xl mx-auto">Tell us about your business and we'll show you exactly what your custom OS would look like.</motion.p>
           </motion.div>
 
