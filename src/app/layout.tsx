@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import RootLayoutShell from "@/components/RootLayoutShell";
+import GrainOverlay from "@/components/GrainOverlay";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -36,7 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${syne.variable}`}>
-      <body>
+      <body style={{ backgroundColor: "#0A0A0B" }}>
+        <GrainOverlay />
         <RootLayoutShell>{children}</RootLayoutShell>
       </body>
     </html>

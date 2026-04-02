@@ -48,7 +48,7 @@ export default function NavSPA() {
               onClick={() => scrollTo("#hero")}
               className="flex items-center gap-2.5 group"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#0066FF] flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300">
+              <div className="w-8 h-8 rounded-lg bg-[#8B5CF6] flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300">
                 <Zap className="w-4 h-4 text-white fill-white" />
               </div>
               <div className="flex flex-col leading-none">
@@ -58,7 +58,7 @@ export default function NavSPA() {
                 >
                   NMC
                 </span>
-                <span className="text-[10px] text-[#8892A4] tracking-[0.12em] uppercase font-medium">
+                <span className="text-[10px] text-[#71717A] tracking-[0.12em] uppercase font-medium">
                   Business OS
                 </span>
               </div>
@@ -70,7 +70,7 @@ export default function NavSPA() {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="px-4 py-2 text-sm text-[#8892A4] hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5 font-medium"
+                  className="px-4 py-2 text-sm text-[#71717A] hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5 font-medium"
                 >
                   {link.label}
                 </button>
@@ -83,7 +83,7 @@ export default function NavSPA() {
                 href="https://app.newmindsetcontent.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-[#8892A4] hover:text-white transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/5"
+                className="flex items-center gap-1.5 text-sm text-[#71717A] hover:text-white transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/5"
               >
                 <LogIn className="w-3.5 h-3.5" />
                 Client Login
@@ -92,7 +92,7 @@ export default function NavSPA() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => scrollTo("#contact")}
-                className="px-5 py-2.5 bg-[#0066FF] text-white text-sm font-semibold rounded-lg hover:bg-[#1A7FFF] transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
+                className="px-5 py-2.5 bg-[#8B5CF6] text-white text-sm font-semibold rounded-lg hover:bg-[#7C3AED] transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
               >
                 Book a Call
               </motion.button>
@@ -101,7 +101,7 @@ export default function NavSPA() {
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-[#8892A4] hover:text-white transition-colors"
+              className="md:hidden p-2 text-[#71717A] hover:text-white transition-colors"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -129,7 +129,7 @@ export default function NavSPA() {
                 >
                   <button
                     onClick={() => scrollTo(link.href)}
-                    className="block w-full text-left px-4 py-3 text-[#B8C4D4] hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium"
+                    className="block w-full text-left px-4 py-3 text-[#A1A1AA] hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium"
                   >
                     {link.label}
                   </button>
@@ -138,7 +138,7 @@ export default function NavSPA() {
               <div className="mt-4 pt-4 border-t border-white/5 space-y-2">
                 <button
                   onClick={() => scrollTo("#contact")}
-                  className="block w-full text-center px-4 py-3 bg-[#0066FF] text-white font-semibold rounded-xl hover:bg-[#1A7FFF] transition-colors"
+                  className="block w-full text-center px-4 py-3 bg-[#8B5CF6] text-white font-semibold rounded-xl hover:bg-[#7C3AED] transition-colors"
                 >
                   Book a Strategy Call
                 </button>
@@ -146,7 +146,7 @@ export default function NavSPA() {
                   href="https://app.newmindsetcontent.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full text-center px-4 py-3 glass border border-white/10 text-[#8892A4] font-medium rounded-xl hover:text-white transition-colors"
+                  className="flex items-center justify-center gap-2 w-full text-center px-4 py-3 glass border border-white/10 text-[#71717A] font-medium rounded-xl hover:text-white transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   Client Login
