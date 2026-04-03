@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne, Playfair_Display } from "next/font/google";
+import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import RootLayoutShell from "@/components/RootLayoutShell";
 import GrainOverlay from "@/components/GrainOverlay";
 import ScanLines from "@/components/ScanLines";
 import CursorGlow from "@/components/CursorGlow";
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-inter",
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const syne = Syne({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-syne",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jetbrains",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const playfair = Playfair_Display({
@@ -45,8 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${syne.variable} ${playfair.variable}`}>
-      <body style={{ backgroundColor: "#0A0A0B" }}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable}`}>
+      <body style={{ backgroundColor: "#000000" }}>
         <GrainOverlay />
         <ScanLines />
         <CursorGlow />

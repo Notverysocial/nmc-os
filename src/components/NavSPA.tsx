@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap, LogIn } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#features", label: "Features" },
+  { href: "#problem", label: "Problem" },
+  { href: "#solution", label: "Solution" },
   { href: "#pricing", label: "Pricing" },
-  { href: "#case-studies", label: "Case Studies" },
-  { href: "#about", label: "About" },
+  { href: "#signals", label: "Signals" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function NavSPA() {
@@ -34,76 +35,121 @@ export default function NavSPA() {
       <motion.header
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "glass-strong shadow-[0_1px_0_rgba(255,255,255,0.05)]"
-            : "bg-transparent"
-        }`}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          background: scrolled ? "rgba(0,0,0,0.92)" : "transparent",
+          borderBottom: scrolled ? "1px solid rgba(26,43,80,0.3)" : "none",
+          backdropFilter: scrolled ? "blur(24px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(24px)" : "none",
+          transition: "background 0.4s ease, border-color 0.4s ease",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between py-4">
+        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              height: "64px",
+            }}
+          >
             {/* Logo */}
             <button
               onClick={() => scrollTo("#hero")}
-              className="flex items-center gap-2.5 group"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: "var(--font-jetbrains)",
+                fontSize: "16px",
+                fontWeight: 600,
+                color: "#ffffff",
+                letterSpacing: "0.1em",
+                padding: "0",
+              }}
             >
-              <div className="w-8 h-8 rounded-lg bg-[#8B5CF6] flex items-center justify-center group-hover:shadow-[0_0_20px_rgba(0,102,255,0.5)] transition-all duration-300">
-                <Zap className="w-4 h-4 text-white fill-white" />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span
-                  className="text-white font-bold text-sm tracking-tight"
-                  style={{ fontFamily: "var(--font-syne)" }}
-                >
-                  NMC
-                </span>
-                <span className="text-[10px] text-[#71717A] tracking-[0.12em] uppercase font-medium">
-                  Business OS
-                </span>
-              </div>
+              NMC
             </button>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+              }}
+              className="hidden md:flex"
+            >
               {navLinks.map((link) => (
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="px-4 py-2 text-sm text-[#71717A] hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/5 font-medium"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "13px",
+                    color: "#666666",
+                    padding: "8px 14px",
+                    letterSpacing: "0.02em",
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "#666666")}
                 >
                   {link.label}
                 </button>
               ))}
             </nav>
 
-            {/* CTA */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* Right — Client Login */}
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }} className="hidden md:flex">
               <a
                 href="https://app.newmindsetcontent.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-sm text-[#71717A] hover:text-white transition-colors font-medium px-3 py-2 rounded-lg hover:bg-white/5"
+                style={{
+                  fontFamily: "var(--font-inter)",
+                  fontSize: "13px",
+                  color: "#666666",
+                  textDecoration: "none",
+                  padding: "7px 16px",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  letterSpacing: "0.02em",
+                  transition: "color 0.2s, border-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#ffffff";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "#666666";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                }}
               >
-                <LogIn className="w-3.5 h-3.5" />
                 Client Login
               </a>
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={() => scrollTo("#contact")}
-                className="px-5 py-2.5 bg-[#8B5CF6] text-white text-sm font-semibold rounded-lg hover:bg-[#7C3AED] transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
-              >
-                Book a Call
-              </motion.button>
             </div>
 
             {/* Mobile toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-[#71717A] hover:text-white transition-colors"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "#666666",
+                padding: "8px",
+              }}
+              className="md:hidden"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X size={20} color="#ffffff" /> : <Menu size={20} color="#666666" />}
             </button>
           </div>
         </div>
@@ -113,32 +159,63 @@ export default function NavSPA() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-[72px] left-4 right-4 z-40 glass-strong rounded-2xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            style={{
+              position: "fixed",
+              top: "64px",
+              left: "16px",
+              right: "16px",
+              zIndex: 40,
+              background: "rgba(0,0,0,0.97)",
+              border: "1px solid rgba(26,43,80,0.4)",
+              padding: "1.5rem",
+            }}
           >
-            <nav className="flex flex-col gap-2">
+            <nav style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07, duration: 0.3 }}
+                  transition={{ delay: i * 0.06, duration: 0.25 }}
                 >
                   <button
                     onClick={() => scrollTo(link.href)}
-                    className="block w-full text-left px-4 py-3 text-[#A1A1AA] hover:text-white hover:bg-white/5 rounded-xl transition-all duration-200 font-medium"
+                    style={{
+                      display: "block",
+                      width: "100%",
+                      textAlign: "left",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "15px",
+                      color: "#999999",
+                      padding: "12px 0",
+                      borderBottom: "1px solid rgba(26,43,80,0.2)",
+                    }}
                   >
                     {link.label}
                   </button>
                 </motion.div>
               ))}
-              <div className="mt-4 pt-4 border-t border-white/5 space-y-2">
+              <div style={{ marginTop: "1rem", display: "flex", flexDirection: "column", gap: "8px" }}>
                 <button
                   onClick={() => scrollTo("#contact")}
-                  className="block w-full text-center px-4 py-3 bg-[#8B5CF6] text-white font-semibold rounded-xl hover:bg-[#7C3AED] transition-colors"
+                  style={{
+                    width: "100%",
+                    padding: "12px",
+                    background: "#ffffff",
+                    color: "#000000",
+                    border: "none",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
                 >
                   Book a Strategy Call
                 </button>
@@ -146,9 +223,19 @@ export default function NavSPA() {
                   href="https://app.newmindsetcontent.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full text-center px-4 py-3 glass border border-white/10 text-[#71717A] font-medium rounded-xl hover:text-white transition-colors"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    padding: "12px",
+                    background: "transparent",
+                    color: "#666666",
+                    border: "1px solid rgba(26,43,80,0.4)",
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "14px",
+                    textDecoration: "none",
+                    textAlign: "center",
+                  }}
                 >
-                  <LogIn className="w-4 h-4" />
                   Client Login
                 </a>
               </div>
