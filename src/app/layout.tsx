@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import RootLayoutShell from "@/components/RootLayoutShell";
+import PixelLife from "@/components/PixelLife";
 import GrainOverlay from "@/components/GrainOverlay";
 import ScanLines from "@/components/ScanLines";
 import CursorGlow from "@/components/CursorGlow";
@@ -47,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable}`}>
       <body style={{ backgroundColor: "#000000" }}>
+        <PixelLife />
         <GrainOverlay />
         <ScanLines />
         <CursorGlow />
