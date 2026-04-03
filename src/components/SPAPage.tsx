@@ -1332,53 +1332,6 @@ export default function SPAPage() {
         </motion.form>
       </motion.section>
 
-      <div className="nmc-line" />
-
-      {/* ─── 12. FOOTER ──────────────────────────────────────────────── */}
-      <footer
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "3rem 2rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "16px",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-jetbrains)",
-            fontSize: "13px",
-            fontWeight: 600,
-            color: "#ffffff",
-            letterSpacing: "0.05em",
-          }}
-        >
-          NMC
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-jetbrains)",
-            fontSize: "11px",
-            color: "#444444",
-            letterSpacing: "0.1em",
-          }}
-        >
-          © {new Date().getFullYear()} NEW MINDSET CONTENT — ALL RIGHTS RESERVED
-        </span>
-        <span
-          style={{
-            fontFamily: "var(--font-jetbrains)",
-            fontSize: "11px",
-            color: "#444444",
-            letterSpacing: "0.08em",
-          }}
-        >
-          os.newmindsetcontent.com
-        </span>
-      </footer>
     </div>
   );
 }
