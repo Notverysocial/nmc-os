@@ -113,15 +113,16 @@ body::before {
 /* Section pill */
 .section-pill {
   display: inline-block;
-  padding: 3px 10px;
+  padding: 4px 12px;
   font-family: var(--font-jetbrains), monospace;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.1em;
-  color: rgba(26, 43, 80, 0.9);
-  border: 1px solid rgba(26, 43, 80, 0.5);
+  color: #8b9fbd;
+  background: rgba(26, 43, 80, 0.15);
+  border: 1px solid rgba(26, 43, 80, 0.6);
   border-radius: 2px;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   text-transform: uppercase;
 }
 

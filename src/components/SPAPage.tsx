@@ -29,15 +29,26 @@ const viewportOpts = { once: true, margin: "-80px" };
 
 function Pill({ label }: { label: string }) {
   return (
-    <div className="section-pill">{label}</div>
+    <>
+      <div 
+        className="w-full h-px mb-16" 
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(26, 43, 80, 0.4), transparent)' }} 
+      />
+      <div className="section-pill">{label}</div>
+    </>
   );
 }
 
 function SectionHeading({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <h2
-      className={`text-4xl md:text-5xl font-bold text-white leading-tight ${className}`}
-      style={{ fontFamily: "var(--font-inter)" }}
+      className={`text-4xl md:text-5xl font-bold leading-tight ${className}`}
+      style={{ 
+        fontFamily: "var(--font-inter)",
+        color: "#FFFFFF",
+        opacity: 1,
+        fontSize: "1.2em"
+      }}
     >
       {children}
     </h2>
@@ -819,7 +830,7 @@ export default function SPAPage() {
                   fontFamily: "var(--font-inter)",
                   fontSize: "1rem",
                   fontWeight: 600,
-                  color: "#cccccc",
+                  color: "#ffffff",
                   marginBottom: "1rem",
                 }}
               >
@@ -1009,7 +1020,7 @@ export default function SPAPage() {
                   fontFamily: "var(--font-jetbrains)",
                   fontSize: "12px",
                   letterSpacing: "0.12em",
-                  color: "#666666",
+                  color: "#ffffff",
                   textTransform: "uppercase",
                   marginBottom: "1rem",
                 }}
