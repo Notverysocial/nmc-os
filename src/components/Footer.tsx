@@ -1,6 +1,6 @@
 "use client";
 
-import { Linkedin, Instagram, X } from "lucide-react";
+import { Link, Globe, X } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -47,10 +47,10 @@ export default function Footer() {
             </a>
             <div className="flex gap-4">
               <a href="#" aria-label="LinkedIn" className="text-[#666] hover:text-white transition-colors duration-200">
-                <Linkedin className="w-4 h-4" />
+                <Link className="w-4 h-4" />
               </a>
               <a href="#" aria-label="Instagram" className="text-[#666] hover:text-white transition-colors duration-200">
-                <Instagram className="w-4 h-4" />
+                <Globe className="w-4 h-4" />
               </a>
               <a href="#" aria-label="X" className="text-[#666] hover:text-white transition-colors duration-200">
                 <X className="w-4 h-4" />
