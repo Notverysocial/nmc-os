@@ -9,9 +9,9 @@ interface PixelLifeProps {
 }
 
 export default function PixelLife({
-  cellSize = 8,
+  cellSize = 10,
   fillRate = 0.15,
-  color = 'rgba(26,43,80,0.18)',
+  color = 'rgba(26,43,80,0.35)',
   fps = 4,
 }: PixelLifeProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
