@@ -34,7 +34,22 @@ function Pill({ label }: { label: string }) {
         className="w-full h-px mb-16" 
         style={{ background: 'linear-gradient(90deg, transparent, rgba(26, 43, 80, 0.4), transparent)' }} 
       />
-      <div className="section-pill">{label}</div>
+      <div 
+        style={{
+          display: "inline-block",
+          padding: "6px 14px",
+          border: "1px solid rgba(26, 43, 80, 0.6)",
+          background: "rgba(26, 43, 80, 0.15)",
+          color: "#8b9fbd",
+          fontFamily: "var(--font-jetbrains)",
+          fontSize: "13px",
+          letterSpacing: "0.1em",
+          marginBottom: "2rem",
+          textTransform: "uppercase"
+        }}
+      >
+        {label}
+      </div>
     </>
   );
 }
@@ -42,12 +57,12 @@ function Pill({ label }: { label: string }) {
 function SectionHeading({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <h2
-      className={`text-4xl md:text-5xl font-bold leading-tight ${className}`}
+      className={`text-5xl md:text-6xl font-bold leading-tight ${className}`}
       style={{ 
         fontFamily: "var(--font-inter)",
         color: "#FFFFFF",
         opacity: 1,
-        fontSize: "1.2em"
+        fontSize: "1.44em"
       }}
     >
       {children}
@@ -59,9 +74,9 @@ function GlassCard({ children }: { children: React.ReactNode }) {
   return (
     <div 
       style={{
-        background: "rgba(0, 0, 0, 0.6)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
+        background: "rgba(0, 0, 0, 0.3)",
+        backdropFilter: "blur(4px)",
+        WebkitBackdropFilter: "blur(4px)",
         border: "1px solid rgba(26, 43, 80, 0.25)",
         borderRadius: "16px",
         padding: "48px",
@@ -81,62 +96,60 @@ function GlassCard({ children }: { children: React.ReactNode }) {
 // ─── DATA ─────────────────────────────────────────────────────────────────
 
 const tickerItems = [
-  "LEAD SCOUT — 14 prospects identified",
-  "CONTENT WRITER — Blog post published",
-  "INTELLIGENCE DESK — Market brief compiled",
-  "PIPELINE ENGINE — 3 deals advanced",
-  "MISSION CONTROL — KPIs updated",
-  "LEAD SCOUT — Outreach sequence launched",
-  "CONTENT WRITER — Social calendar synced",
-  "INTELLIGENCE DESK — Competitor brief ready",
+  "LEAD SCOUT — 23 prospects qualified in Miami",
+  "CONTENT WRITER — 3 blog posts published today",
+  "OUTREACH AGENT — 47 follow-ups sent, 12 replies",
+  "INTELLIGENCE DESK — Morning brief compiled for 14 clients",
+  "PIPELINE MONITOR — 3 deals flagged for review",
+  "NEXUS — System optimization #47 deployed",
 ];
 
 const painPoints = [
-  "You're still doing manually what AI can automate overnight.",
-  "Your team spends 40% of their week on low-value admin work.",
-  "Every tool you use is siloed — none of them talk to each other.",
-  "You're making decisions based on gut, not real-time data.",
-  "Your competitors are compounding their edge while you're catching up.",
+  "Leads going cold because nobody follows up fast enough.",
+  "Content you should be publishing but don't have the bandwidth.",
+  "Decisions made on gut feeling because nobody's pulling the data.",
+  "Your competitors are automating while you're still doing it by hand.",
+  "The tools you pay for don't talk to each other.",
 ];
 
 const modules = [
   {
     id: "01",
-    name: "Workspace",
-    desc: "Centralized command center for every department. One login, full visibility.",
+    name: "WORKSPACE",
+    desc: "Command center replacing five tabs and three apps. Centralized visibility for every department.",
   },
   {
     id: "02",
-    name: "Pipeline Engine",
-    desc: "Automated lead scoring, follow-up sequences, and deal advancement — 24/7.",
+    name: "PIPELINE ENGINE",
+    desc: "Automatic lead capture, scoring, and nurture. Deal advancement that never sleeps.",
   },
   {
     id: "03",
-    name: "Intelligence Desk",
-    desc: "Real-time market briefs, competitor monitoring, and performance dashboards.",
+    name: "INTELLIGENCE DESK",
+    desc: "Personalized daily briefs from across the internet. Real-time market and competitor monitoring.",
   },
   {
     id: "04",
-    name: "Mission Control",
-    desc: "Strategic KPI tracking, team accountability, and executive reporting in one view.",
+    name: "MISSION CONTROL",
+    desc: "AI agents that do the work, not just track it. Strategic KPI tracking and automated reporting.",
   },
 ];
 
 const differentiators = [
   {
     n: "01",
-    title: "Built for your industry",
-    desc: "Not a generic SaaS tool. Each OS is configured for staffing, real estate, or e-commerce.",
+    title: "We install a workforce.",
+    desc: "Other platforms sell tools. Nexus deploys ghost employees that work while you sleep.",
   },
   {
     n: "02",
-    title: "You own the infrastructure",
-    desc: "Your data, your agents, your workflows. We build — you own.",
+    title: "Bespoke, not boxed.",
+    desc: "We study your business and build around your workflows. Not a generic template.",
   },
   {
     n: "03",
-    title: "No-code client dashboard",
-    desc: "Your team gets a clean interface. No technical overhead required.",
+    title: "It compounds daily.",
+    desc: "Every optimization makes the system smarter. Month 12 is unrecognizable from month 1.",
   },
   {
     n: "04",
@@ -152,30 +165,30 @@ const differentiators = [
 
 const industries = [
   {
-    name: "Staffing & Recruiting",
+    name: "Staffing",
     stat: "340%",
-    label: "Average ROI Year 1",
-    items: ["Automated candidate sourcing", "Client pipeline management", "Compliance reporting"],
+    label: "ROI Year 1",
+    items: ["Automated candidate sourcing.", "AI-powered pipeline.", "Your agents find placements while you sleep."],
   },
   {
     name: "Real Estate",
     stat: "3x",
-    label: "More deals closed",
-    items: ["Lead nurture sequences", "Market intelligence briefs", "Commission tracking"],
+    label: "More Deals",
+    items: ["Lead nurture sequences.", "Daily market briefs.", "Every inquiry followed up in minutes."],
   },
   {
     name: "E-Commerce",
     stat: "200%",
-    label: "Revenue lift",
-    items: ["Customer lifecycle automation", "Inventory intelligence", "Review and retention flows"],
+    label: "Revenue Lift",
+    items: ["AI-generated content.", "Customer lifecycle automation.", "Ads that optimize themselves."],
   },
 ];
 
 const timeline = [
-  { week: "WK01", label: "Discovery", desc: "Audit your current stack, map gaps, define success metrics." },
-  { week: "WK02", label: "Build", desc: "Configure your OS modules, connect data sources, deploy agents." },
-  { week: "WK03", label: "Launch", desc: "Go live with first automations, train your team, capture quick wins." },
-  { week: "WK04", label: "Optimize", desc: "Review KPIs, iterate on workflows, lock in momentum." },
+  { week: "WK01", label: "Discovery", desc: "Audit your current stack, map gaps, and define NEXUS success metrics." },
+  { week: "WK02", label: "Build", desc: "Configure your OS modules, connect data sources, and deploy ghost employees." },
+  { week: "WK03", label: "Launch", desc: "Go live with first automations, train your team, and capture quick wins." },
+  { week: "WK04", label: "Optimize", desc: "Review KPIs, iterate on agent workflows, and lock in compounding momentum." },
 ];
 
 const plans = [
@@ -230,19 +243,19 @@ const plans = [
 
 const testimonials = [
   {
-    quote: "We closed 40% more deals in Q3 without hiring anyone new. The pipeline engine runs itself.",
+    quote: "We closed 40% more deals in Q3 without hiring anyone new. The NEXUS pipeline engine runs itself.",
     name: "Marcus T.",
     company: "Apex Talent Group",
     role: "CEO",
   },
   {
-    quote: "I finally have visibility into every part of the business from one screen. Game-changing.",
+    quote: "I finally have visibility into every part of the business from one screen. NEXUS is game-changing.",
     name: "Sarah K.",
     company: "Meridian Properties",
     role: "Founder",
   },
   {
-    quote: "The intelligence desk alone saved us 12 hours a week in research and reporting.",
+    quote: "The intelligence desk alone saved us 12 hours a week in research and reporting. Our ghost employees are elite.",
     name: "David R.",
     company: "Brightline Commerce",
     role: "COO",
@@ -259,14 +272,38 @@ export default function SPAPage() {
     tier: "",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("submitting");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", company: "", tier: "", message: "" });
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 3000);
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+    }
   };
 
   return (
-    <div style={{ background: "#000000", color: "#ffffff", minHeight: "100vh" }}>
-      <NavSPA />
+    <div style={{ background: "transparent", color: "#ffffff", minHeight: "100vh", position: "relative" }}>
+      <div style={{ position: "relative", zIndex: 10 }}>
+        <NavSPA />
 
       {/* ─── 1. HERO ─────────────────────────────────────────────────── */}
       <section
@@ -293,7 +330,7 @@ export default function SPAPage() {
                 textTransform: "uppercase",
               }}
             >
-              NEW MINDSET CONTENT // BUSINESS OS
+              NEXUS // ENTERPRISE OS
             </span>
           </motion.div>
 
@@ -309,9 +346,7 @@ export default function SPAPage() {
               margin: "1.5rem 0 1.25rem",
             }}
           >
-            Your Business.
-            <br />
-            <em style={{ fontStyle: "italic" }}>Supercharged.</em>
+            Hire Agents, Not Employees.
           </motion.h1>
 
           <motion.p
@@ -325,7 +360,7 @@ export default function SPAPage() {
               lineHeight: 1.65,
             }}
           >
-            An AI-powered operations platform built for growth-stage companies. One system. Unlimited leverage.
+            Deploy ghost employees that work 24/7, compound daily, and cost less than your monthly car payment. This isn't a website. It's a revenue machine.
           </motion.p>
 
           <motion.div
@@ -348,12 +383,12 @@ export default function SPAPage() {
                 letterSpacing: "0.02em",
               }}
             >
-              Book a Strategy Call
+              Get Your Hidden Revenue Report
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => document.querySelector("#solution")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               style={{
                 background: "transparent",
                 color: "#ffffff",
@@ -366,7 +401,7 @@ export default function SPAPage() {
                 letterSpacing: "0.02em",
               }}
             >
-              See How It Works
+              Book a Strategy Call
             </motion.button>
           </motion.div>
 
@@ -443,9 +478,9 @@ export default function SPAPage() {
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-12">
-              You&apos;re running your business
+              You need more people.
               <br />
-              on duct tape.
+              You can&apos;t afford more people.
             </SectionHeading>
           </motion.div>
 
@@ -478,7 +513,7 @@ export default function SPAPage() {
                   style={{
                     fontFamily: "var(--font-inter)",
                     fontSize: "1.125rem",
-                    color: "#cccccc",
+                    color: "#FFFFFF",
                     lineHeight: 1.5,
                     fontWeight: 400,
                   }}
@@ -508,9 +543,9 @@ export default function SPAPage() {
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">
-              Every day you wait,
+              Every month without a system,
               <br />
-              your competitors get smarter.
+              you&apos;re losing money.
             </SectionHeading>
           </motion.div>
 
@@ -541,7 +576,7 @@ export default function SPAPage() {
                   textTransform: "uppercase",
                 }}
               >
-                WITHOUT
+                WITHOUT NEXUS
               </div>
               {[
                 "Manual processes eating 20+ hours/week",
@@ -567,7 +602,7 @@ export default function SPAPage() {
               ))}
             </div>
 
-            {/* WITH THE OS column */}
+            {/* WITH NEXUS column */}
             <div
               style={{
                 background: "rgba(26,43,80,0.06)",
@@ -585,14 +620,14 @@ export default function SPAPage() {
                   textTransform: "uppercase",
                 }}
               >
-                WITH THE OS
+                WITH NEXUS
               </div>
               {[
-                "Fully automated pipelines running 24/7",
+                "Minutes-fast follow-up 24/7/365",
+                "Ghost employees handle all admin work",
                 "Real-time dashboards for every decision",
-                "One unified system — all data connected",
-                "Zero revenue leaks — every follow-up automated",
-                "Team focused only on high-leverage work",
+                "Zero revenue leaks — every lead nurtured",
+                "Team focused only on high-leverage growth",
               ].map((item, i) => (
                 <div
                   key={i}
@@ -621,7 +656,7 @@ export default function SPAPage() {
                   >
                     ✓
                   </span>
-                  <span style={{ fontFamily: "var(--font-inter)", fontSize: "15px", color: "#cccccc" }}>
+                  <span style={{ fontFamily: "var(--font-inter)", fontSize: "15px", color: "#FFFFFF" }}>
                     {item}
                   </span>
                 </div>
@@ -648,9 +683,9 @@ export default function SPAPage() {
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-16">
-              One system.
+              Most businesses have a website.
               <br />
-              Built for your business.
+              You&apos;ll have Nexus.
             </SectionHeading>
           </motion.div>
 
@@ -706,7 +741,7 @@ export default function SPAPage() {
                   style={{
                     fontFamily: "var(--font-inter)",
                     fontSize: "15px",
-                    color: "#666666",
+                    color: "#FFFFFF",
                     lineHeight: 1.6,
                   }}
                 >
@@ -731,7 +766,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ WHY US ]" />
+            <Pill label="[ WHY NEXUS ]" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">Five reasons we&apos;re different.</SectionHeading>
@@ -780,7 +815,7 @@ export default function SPAPage() {
                     style={{
                       fontFamily: "var(--font-inter)",
                       fontSize: "15px",
-                      color: "#666666",
+                      color: "#FFFFFF",
                       lineHeight: 1.55,
                     }}
                   >
@@ -874,7 +909,7 @@ export default function SPAPage() {
                       style={{
                         fontFamily: "var(--font-inter)",
                         fontSize: "13px",
-                        color: "#666666",
+                        color: "#FFFFFF",
                         display: "flex",
                         alignItems: "center",
                         gap: "8px",
@@ -916,7 +951,7 @@ export default function SPAPage() {
             <Pill label="[ ONBOARDING ]" />
           </motion.div>
           <motion.div variants={fadeUp}>
-            <SectionHeading className="mb-14">Your first 30 days.</SectionHeading>
+            <SectionHeading className="mb-14">From zero to compounding in 30 days.</SectionHeading>
           </motion.div>
 
           <div
@@ -966,7 +1001,7 @@ export default function SPAPage() {
                   style={{
                     fontFamily: "var(--font-inter)",
                     fontSize: "14px",
-                    color: "#666666",
+                    color: "#FFFFFF",
                     lineHeight: 1.55,
                   }}
                 >
@@ -1008,7 +1043,9 @@ export default function SPAPage() {
             <Pill label="[ PRICING ]" />
           </motion.div>
           <motion.div variants={fadeUp}>
-            <SectionHeading className="mb-14">Clear pricing. Real results.</SectionHeading>
+            <SectionHeading className="mb-14">
+              If we find $10,000/month in revenue you&apos;re not capturing — and we usually do — would it be worth $499 to start?
+            </SectionHeading>
           </motion.div>
 
           <div
@@ -1081,7 +1118,7 @@ export default function SPAPage() {
                       style={{
                         fontFamily: "var(--font-inter)",
                         fontSize: "14px",
-                        color: "#666666",
+                        color: "#FFFFFF",
                       }}
                     >
                       {plan.period}
@@ -1099,7 +1136,7 @@ export default function SPAPage() {
                         gap: "10px",
                         fontFamily: "var(--font-inter)",
                         fontSize: "14px",
-                        color: "#999999",
+                        color: "#FFFFFF",
                       }}
                     >
                       <span
@@ -1158,7 +1195,7 @@ export default function SPAPage() {
             <Pill label="[ SIGNALS ]" />
           </motion.div>
           <motion.div variants={fadeUp}>
-            <SectionHeading className="mb-14">What clients say.</SectionHeading>
+            <SectionHeading className="mb-14">What operators are saying.</SectionHeading>
           </motion.div>
 
           <div
@@ -1196,7 +1233,7 @@ export default function SPAPage() {
                   style={{
                     fontFamily: "var(--font-jetbrains)",
                     fontSize: "11px",
-                    color: "#666666",
+                    color: "#FFFFFF",
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
                   }}
@@ -1226,19 +1263,19 @@ export default function SPAPage() {
               <Pill label="[ CONNECT ]" />
             </motion.div>
             <motion.div variants={fadeUp}>
-              <SectionHeading className="mb-4">Ready to supercharge?</SectionHeading>
+              <SectionHeading className="mb-4">Ready to meet your ghost employees?</SectionHeading>
             </motion.div>
             <motion.p
               variants={fadeUp}
               style={{
                 fontFamily: "var(--font-inter)",
                 fontSize: "16px",
-                color: "#666666",
+                color: "#FFFFFF",
                 marginBottom: "2.5rem",
                 lineHeight: 1.6,
               }}
             >
-              Tell us about your business. We&apos;ll show you exactly how the OS would work for you.
+              Tell us about your business. We&apos;ll show you exactly how your ghost employees will work for you.
             </motion.p>
 
             <motion.form
@@ -1257,7 +1294,7 @@ export default function SPAPage() {
                       fontFamily: "var(--font-jetbrains)",
                       fontSize: "10px",
                       letterSpacing: "0.12em",
-                      color: "#666666",
+                      color: "#FFFFFF",
                       textTransform: "uppercase",
                       display: "block",
                       marginBottom: "8px",
@@ -1293,7 +1330,7 @@ export default function SPAPage() {
                     fontFamily: "var(--font-jetbrains)",
                     fontSize: "10px",
                     letterSpacing: "0.12em",
-                    color: "#666666",
+                    color: "#FFFFFF",
                     textTransform: "uppercase",
                     display: "block",
                     marginBottom: "8px",
@@ -1331,7 +1368,7 @@ export default function SPAPage() {
                     fontFamily: "var(--font-jetbrains)",
                     fontSize: "10px",
                     letterSpacing: "0.12em",
-                    color: "#666666",
+                    color: "#FFFFFF",
                     textTransform: "uppercase",
                     display: "block",
                     marginBottom: "8px",
@@ -1363,28 +1400,32 @@ export default function SPAPage() {
 
               <motion.button
                 type="submit"
+                disabled={status === "submitting" || status === "success"}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 style={{
                   padding: "14px",
-                  background: "#ffffff",
+                  background: status === "success" ? "#4ade80" : status === "error" ? "#ef4444" : "#ffffff",
                   color: "#000000",
                   border: "none",
                   fontFamily: "var(--font-inter)",
                   fontSize: "14px",
                   fontWeight: 600,
-                  cursor: "pointer",
+                  cursor: (status === "submitting" || status === "success") ? "default" : "pointer",
                   letterSpacing: "0.03em",
                   marginTop: "0.5rem",
+                  opacity: status === "submitting" ? 0.7 : 1,
+                  transition: "background 0.3s ease"
                 }}
               >
-                Send Message
+                {status === "submitting" ? "Sending..." : status === "success" ? "Message Sent!" : status === "error" ? "Error! Try Again" : "Send Message"}
               </motion.button>
             </motion.form>
           </div>
         </GlassCard>
       </motion.section>
 
+      </div>
     </div>
   );
 }

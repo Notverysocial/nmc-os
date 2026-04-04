@@ -10,8 +10,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {/* LEFT: Brand */}
           <div>
-            <p className="text-white text-sm font-mono">New Mindset Content</p>
-            <p className="text-[#666] text-xs font-mono mt-1">Business OS Platform</p>
+            <p className="text-white text-sm font-mono">NEXUS</p>
+            <p className="text-[#666] text-xs font-mono mt-1">ENTERPRISE OS</p>
           </div>
 
           {/* CENTER: Nav links */}
@@ -20,7 +20,7 @@ export default function Footer() {
               { label: "Features", href: "#solution" },
               { label: "Pricing", href: "#pricing" },
               { label: "Industries", href: "#industries" },
-              { label: "Contact", href: "#connect" },
+              { label: "Contact", href: "#contact" },
             ].map(({ label, href }) => (
               <a
                 key={label}
@@ -28,8 +28,7 @@ export default function Footer() {
                 className="text-[#666] text-xs font-mono hover:text-white transition-colors duration-200"
                 onClick={(e) => {
                   e.preventDefault();
-                  const el = document.querySelector(href);
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 {label}
@@ -40,7 +39,9 @@ export default function Footer() {
           {/* RIGHT: Login + social */}
           <div className="flex flex-col gap-3 md:items-end">
             <a
-              href="#connect"
+              href="https://app.newmindsetcontent.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#666] text-xs font-mono hover:text-white transition-colors duration-200"
             >
               Client Login
@@ -65,10 +66,10 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
           <p className="text-[#444] text-xs font-mono">
-            © 2026 New Mindset Content. All rights reserved.
+            © 2026 NEXUS. BUILT BY NEON BEACH CLUB
           </p>
           <p className="text-[#444] text-xs font-mono">
-            Powered by NBC Studio
+            // LAST UPDATE: 2026.04.04
           </p>
         </div>
       </div>

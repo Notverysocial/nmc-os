@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#problem", label: "Problem" },
-  { href: "#solution", label: "Solution" },
+  { href: "#problem", label: "The Problem" },
+  { href: "#solution", label: "The Solution" },
   { href: "#pricing", label: "Pricing" },
   { href: "#signals", label: "Signals" },
-  { href: "#contact", label: "Contact" },
+  { href: "#contact", label: "Connect" },
 ];
 
 export default function NavSPA() {
@@ -73,7 +73,7 @@ export default function NavSPA() {
                 padding: "0",
               }}
             >
-              NMC
+              NEXUS
             </button>
 
             {/* Desktop Nav */}

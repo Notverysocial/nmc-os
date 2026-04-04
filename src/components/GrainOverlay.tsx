@@ -5,7 +5,7 @@ export default function GrainOverlay() {
     <div
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none select-none"
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 1 }}
     >
       <svg
         className="absolute inset-0 w-full h-full"
@@ -20,7 +20,7 @@ export default function GrainOverlay() {
           />
           <feColorMatrix type="saturate" values="0" />
         </filter>
-        <rect width="100%" height="100%" filter="url(#grain)" opacity="0.06" />
+        <rect width="100%" height="100%" filter="url(#grain)" opacity="0.08" />
       </svg>
     </div>
   );

@@ -10,7 +10,7 @@ interface PixelLifeProps {
 
 export default function PixelLife({
   cellSize = 10,
-  fillRate = 0.15,
+  fillRate = 0.25,
   color = 'rgba(26,43,80,0.35)',
   fps = 4,
 }: PixelLifeProps) {

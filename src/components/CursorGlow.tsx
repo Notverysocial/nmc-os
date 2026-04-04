@@ -7,5 +7,5 @@ export default function CursorGlow() {
     window.addEventListener('mousemove', h);
     return () => window.removeEventListener('mousemove', h);
   }, []);
-  return <div className="fixed pointer-events-none" style={{ left: pos.x - 150, top: pos.y - 150, width: 300, height: 300, background: 'radial-gradient(circle, rgba(26,43,80,0.25) 0%, transparent 70%)', borderRadius: '50%', zIndex: 9997, transition: 'left 0.08s ease-out, top 0.08s ease-out' }} />;
+  return <div className="fixed pointer-events-none" style={{ left: pos.x - 150, top: pos.y - 150, width: 300, height: 300, background: 'radial-gradient(circle, rgba(26,43,80,0.3) 0%, transparent 70%)', borderRadius: '50%', zIndex: 3, transition: 'left 0.08s ease-out, top 0.08s ease-out' }} />;
 }
