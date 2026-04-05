@@ -23,6 +23,7 @@
   /* Animations */
   --animate-ticker: ticker 40s linear infinite;
   --animate-pulse-glow: pulseGlow 6s ease-in-out infinite;
+  --animate-scan-sweep: scanSweep 12s linear infinite;
 
   @keyframes ticker {
     0% { transform: translateX(0%); }
@@ -31,6 +32,10 @@
   @keyframes pulseGlow {
     0%, 100% { opacity: 0.6; }
     50% { opacity: 1.0; }
+  }
+  @keyframes scanSweep {
+    0% { top: -100px; }
+    100% { top: 100%; }
   }
   @keyframes orbFloat {
     0%, 100% { transform: translate(0, 0) scale(1); }

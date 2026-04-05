@@ -1,9 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import ParticleField from "./ParticleField";
 import NavSPA from "./NavSPA";
+import Typewriter from "./Typewriter";
+import AnimatedCounter from "./AnimatedCounter";
+import GlassCardImport from "./GlassCard";
+
+const getTimestamp = (sec: string) => `// 2026.04.05 // SEC.${sec} // ACTIVE`;
 
 // ─── ANIMATION VARIANTS ────────────────────────────────────────────────────
 
@@ -27,28 +32,34 @@ const viewportOpts = { once: true, margin: "-80px" };
 
 // ─── SHARED COMPONENTS ─────────────────────────────────────────────────────
 
-function Pill({ label }: { label: string }) {
+function Pill({ label, sec = "01" }: { label: string; sec?: string }) {
+  const timestamp = useMemo(() => getTimestamp(sec), [sec]);
   return (
     <>
       <div 
         className="w-full h-px mb-16" 
         style={{ background: 'linear-gradient(90deg, transparent, rgba(26, 43, 80, 0.4), transparent)' }} 
       />
-      <div 
-        style={{
-          display: "inline-block",
-          padding: "6px 14px",
-          border: "1px solid rgba(26, 43, 80, 0.6)",
-          background: "rgba(26, 43, 80, 0.15)",
-          color: "#8b9fbd",
-          fontFamily: "var(--font-jetbrains)",
-          fontSize: "13px",
-          letterSpacing: "0.1em",
-          marginBottom: "2rem",
-          textTransform: "uppercase"
-        }}
-      >
-        {label}
+      <div className="flex flex-col gap-2 mb-8">
+        <div 
+          style={{
+            display: "inline-block",
+            padding: "6px 14px",
+            border: "1px solid rgba(26, 43, 80, 0.6)",
+            background: "rgba(26, 43, 80, 0.15)",
+            color: "#8b9fbd",
+            fontFamily: "var(--font-jetbrains)",
+            fontSize: "13px",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            alignSelf: "flex-start"
+          }}
+        >
+          {label}
+        </div>
+        <div className="text-[10px] font-mono text-white/20 tracking-widest pl-1">
+          {timestamp}
+        </div>
       </div>
     </>
   );
@@ -70,26 +81,11 @@ function SectionHeading({ children, className = "" }: { children: React.ReactNod
   );
 }
 
-function GlassCard({ children }: { children: React.ReactNode }) {
+function GlassCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div 
-      style={{
-        background: "rgba(0, 0, 0, 0.3)",
-        backdropFilter: "blur(4px)",
-        WebkitBackdropFilter: "blur(4px)",
-        border: "1px solid rgba(26, 43, 80, 0.25)",
-        borderRadius: "16px",
-        padding: "48px",
-        marginBottom: "32px",
-        maxWidth: "1200px",
-        marginLeft: "auto",
-        marginRight: "auto",
-        position: "relative",
-        zIndex: 10
-      }}
-    >
+    <GlassCardImport className={`p-12 mb-8 max-w-[1200px] mx-auto z-10 ${className}`} hover={false}>
       {children}
-    </div>
+    </GlassCardImport>
   );
 }
 
@@ -311,7 +307,7 @@ export default function SPAPage() {
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
         style={{ paddingTop: "80px" }}
       >
-        <ParticleField density={40} opacity={0.1} color="255,255,255" connectionDistance={100} className="z-0" />
+        {/* WebGL background is now handled globally in root layout */}
         <div className="hero-glow" />
 
         <motion.div
@@ -346,7 +342,7 @@ export default function SPAPage() {
               margin: "1.5rem 0 1.25rem",
             }}
           >
-            Hire Agents, Not Employees.
+            <Typewriter text="Hire Agents, Not Employees." speed={70} delay={500} />
           </motion.h1>
 
           <motion.p
@@ -475,7 +471,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ THE PROBLEM ]" />
+            <Pill label="[ THE PROBLEM ]" sec="02" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-12">
@@ -540,7 +536,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ THE COST ]" />
+            <Pill label="[ THE COST ]" sec="03" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">
@@ -680,7 +676,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ THE SOLUTION ]" />
+            <Pill label="[ THE SOLUTION ]" sec="04" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-16">
@@ -767,7 +763,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ WHY NEXUS ]" />
+            <Pill label="[ WHY NEXUS ]" sec="05" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">Five reasons we&apos;re different.</SectionHeading>
@@ -842,7 +838,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ BUILT FOR ]" />
+            <Pill label="[ BUILT FOR ]" sec="06" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">Your industry. Our expertise.</SectionHeading>
@@ -878,7 +874,10 @@ export default function SPAPage() {
                     letterSpacing: "-0.03em",
                   }}
                 >
-                  {ind.stat}
+                  <AnimatedCounter 
+                    value={parseFloat(ind.stat)} 
+                    suffix={ind.stat.includes('%') ? '%' : ind.stat.includes('x') ? 'x' : ''} 
+                  />
                 </div>
                 <div
                   style={{
@@ -949,7 +948,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ ONBOARDING ]" />
+            <Pill label="[ ONBOARDING ]" sec="07" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">From zero to compounding in 30 days.</SectionHeading>
@@ -1041,7 +1040,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ PRICING ]" />
+            <Pill label="[ PRICING ]" sec="08" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">
@@ -1193,7 +1192,7 @@ export default function SPAPage() {
       >
         <GlassCard>
           <motion.div variants={fadeUp}>
-            <Pill label="[ SIGNALS ]" />
+            <Pill label="[ SIGNALS ]" sec="09" />
           </motion.div>
           <motion.div variants={fadeUp}>
             <SectionHeading className="mb-14">What operators are saying.</SectionHeading>
@@ -1261,7 +1260,7 @@ export default function SPAPage() {
         <GlassCard>
           <div style={{ maxWidth: "680px", margin: "0 auto" }}>
             <motion.div variants={fadeUp}>
-              <Pill label="[ CONNECT ]" />
+              <Pill label="[ CONNECT ]" sec="10" />
             </motion.div>
             <motion.div variants={fadeUp}>
               <SectionHeading className="mb-4">Ready to meet your ghost employees?</SectionHeading>

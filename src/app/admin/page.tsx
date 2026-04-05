@@ -74,7 +74,7 @@ function SparklineChart({ data }: { data: number[] }) {
 function StatCard({
   label, value, sub, icon: Icon, accent,
 }: {
-  label: string; value: string; sub: string; icon: React.ElementType; accent: string;
+  label: string; value: string; sub: string; icon: any; accent: string;
 }) {
   return (
     <div
@@ -86,7 +86,7 @@ function StatCard({
           className="w-9 h-9 rounded-xl flex items-center justify-center"
           style={{ background: `${accent}18`, border: `1px solid ${accent}30` }}
         >
-          <Icon className="w-4.5 h-4.5" style={{ color: accent }} />
+          <Icon className="w-5 h-5" style={{ color: accent }} />
         </div>
         <span className="text-xs text-slate-500 font-medium">{sub}</span>
       </div>

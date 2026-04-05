@@ -25,6 +25,15 @@ export default function GlassCard({
     none: "hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(139,92,246,0.1)]",
   };
 
+  const corners = (
+    <>
+      <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-white/20 rounded-tl-lg" />
+      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-white/20 rounded-tr-lg" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-white/20 rounded-bl-lg" />
+      <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-white/20 rounded-br-lg" />
+    </>
+  );
+
   if (hover) {
     return (
       <motion.div
@@ -32,15 +41,17 @@ export default function GlassCard({
         initial="rest"
         whileHover="hover"
         onClick={onClick}
-        className={`glass rounded-2xl transition-all duration-300 ${glowClasses[glowColor]} ${className} ${onClick ? "cursor-pointer" : ""}`}
+        className={`glass relative rounded-2xl transition-all duration-300 ${glowClasses[glowColor]} ${className} ${onClick ? "cursor-pointer" : ""}`}
       >
+        {corners}
         {children}
       </motion.div>
     );
   }
 
   return (
-    <div className={`glass rounded-2xl ${className}`}>
+    <div className={`glass relative rounded-2xl ${className}`}>
+      {corners}
       {children}
     </div>
   );
