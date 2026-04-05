@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { useRef, useMemo, useEffect } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const vertexShader = `
@@ -13,71 +13,78 @@ const vertexShader = `
 `;
 
 const fragmentShader = `
+  precision highp float;
   uniform float uTime;
   uniform vec2 uResolution;
   uniform float uScroll;
   varying vec2 vUv;
 
-  // Simple noise function
-  float noise(vec2 p) {
-    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-  }
-
   void main() {
     vec2 uv = vUv;
-    
-    // Adjust UV for aspect ratio
     float aspect = uResolution.x / uResolution.y;
-    uv.x *= aspect;
+    vec2 p = (uv - 0.5) * 2.0;
+    p.x *= aspect;
 
-    // Energy field logic
-    vec3 color1 = vec3(0.05, 0.08, 0.15); // Deep Blue
-    vec3 color2 = vec3(0.1, 0.15, 0.3);   // Lighter Blue/Indigo
+    // Movement logic
+    float wave = sin(p.x * 2.0 + uTime * 0.5) * 0.5 + 0.5;
+    float flow = cos(p.y * 3.0 + uTime * 0.3 + uScroll * 4.0) * 0.5 + 0.5;
     
-    float pulse = sin(uTime * 0.5 + uv.y * 2.0) * 0.5 + 0.5;
-    float flow = sin(uv.x * 3.0 + uTime * 0.2 + uScroll * 2.0);
+    // Deep technical colors
+    vec3 col1 = vec3(0.01, 0.02, 0.06); // Dark
+    vec3 col2 = vec3(0.04, 0.08, 0.22); // Electric blue
     
-    float energy = smoothstep(0.4, 0.6, sin(uv.y * 10.0 + flow + uTime * 0.3));
-    energy *= 0.15; // Keep it subtle
+    float mask = smoothstep(0.4, 0.6, sin(p.y * 6.0 + wave + flow));
+    vec3 color = mix(col1, col2, mask * 0.25);
+    
+    // Technical HUD grid 
+    vec2 gridUv = p * 15.0;
+    float grid = (step(0.985, fract(gridUv.x)) + step(0.985, fract(gridUv.y))) * 0.035;
+    color += vec3(grid * 0.5, grid * 0.7, grid * 1.0);
 
-    vec3 finalColor = mix(color1, color2, energy * pulse);
-    
-    // Add very subtle scanlines in the shader
-    float scanline = sin(uv.y * 800.0) * 0.04;
-    finalColor -= scanline;
-
-    gl_FragmentColor = vec4(finalColor, 1.0);
+    gl_FragColor = vec4(color, 1.0);
   }
 `;
 
 function EnergyField() {
   const meshRef = useRef<THREE.Mesh>(null);
+  const { size } = useThree();
+  
+  // Create stable uniforms object
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uResolution: { value: new THREE.Vector2(typeof window !== 'undefined' ? window.innerWidth : 1, typeof window !== 'undefined' ? window.innerHeight : 1) },
+      uResolution: { value: new THREE.Vector2(size.width, size.height) },
       uScroll: { value: 0 },
     }),
     []
   );
 
+  // Update resolution when size changes
+  useEffect(() => {
+    uniforms.uResolution.value.set(size.width, size.height);
+  }, [size, uniforms]);
+
   useFrame((state) => {
     if (meshRef.current) {
       const material = meshRef.current.material as THREE.ShaderMaterial;
-      material.uniforms.uTime.value = state.clock.getElapsedTime();
-      material.uniforms.uScroll.value = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (material.uniforms) {
+        material.uniforms.uTime.value = state.clock.elapsedTime;
+        const scrollMax = typeof document !== 'undefined' ? document.body.scrollHeight - window.innerHeight : 0;
+        material.uniforms.uScroll.value = scrollMax > 0 ? window.scrollY / scrollMax : 0;
+      }
     }
   });
 
   return (
-    <mesh ref={meshRef}>
-      <planeGeometry args={[2, 2]} />
+    <mesh ref={meshRef} frustumCulled={false} scale={[size.width, size.height, 1]}>
+      <planeGeometry args={[1, 1]} />
       <shaderMaterial
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}
         depthWrite={false}
         depthTest={false}
+        transparent={true}
       />
     </mesh>
   );
@@ -85,10 +92,17 @@ function EnergyField() {
 
 export default function WebGLBackground() {
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-black">
+    <div 
+      className="fixed inset-0 pointer-events-none overflow-hidden bg-black" 
+      style={{ zIndex: -10 }}
+    >
       <Canvas
-        camera={{ position: [0, 0, 1] }}
-        gl={{ antialias: false, alpha: false }}
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        gl={{ 
+          antialias: false, 
+          alpha: true, 
+          powerPreference: "high-performance"
+        }}
         dpr={[1, 2]}
       >
         <EnergyField />

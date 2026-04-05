@@ -1,22 +1,28 @@
+'use client';
+
+import React from 'react';
+
 export default function ScanLines() {
   return (
-    <>
-      {/* Static grid-like scanlines */}
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {/* Static very subtle vertical lines */}
       <div 
-        className="fixed inset-0 pointer-events-none" 
-        style={{ 
-          zIndex: 2, 
-          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(26,43,80,0.1) 2px, rgba(26,43,80,0.1) 4px)' 
-        }} 
-      />
-      {/* Periodic sweep line */}
-      <div 
-        className="fixed left-0 right-0 h-[100px] pointer-events-none animate-scan-sweep opacity-[0.07]"
+        className="absolute inset-0 opacity-[0.03]" 
         style={{
-          zIndex: 3,
-          background: 'linear-gradient(to bottom, transparent, rgba(26,43,80,0.4), transparent)',
+          backgroundImage: 'linear-gradient(90deg, #ffffff 1px, transparent 1px)',
+          backgroundSize: '4px 100%'
         }}
       />
-    </>
+      
+      {/* Moving scan sweep */}
+      <div 
+        className="absolute left-0 right-0 h-[100px] animate-scan-sweep"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(139, 159, 189, 0.08), transparent)',
+          borderTop: '0.5px solid rgba(139, 159, 189, 0.15)',
+          boxShadow: '0 0 15px rgba(26, 43, 80, 0.2)'
+        }}
+      />
+    </div>
   );
 }

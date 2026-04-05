@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { useInView, useMotionValue, useSpring, motion } from 'framer-motion';
+import { useInView, animate } from 'framer-motion';
 
 interface AnimatedCounterProps {
   value?: number;
-  end?: number; // Alias for value to support existing usage
+  end?: number;
   suffix?: string;
   prefix?: string;
   duration?: number;
@@ -16,32 +16,26 @@ export default function AnimatedCounter({
   end,
   suffix = '',
   prefix = '',
-  duration = 2.5,
+  duration = 2,
 }: AnimatedCounterProps) {
   const targetValue = value ?? end ?? 0;
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, {
-    duration: duration * 1000,
-    bounce: 0,
-  });
 
   useEffect(() => {
-    if (inView) {
-      motionValue.set(targetValue);
+    if (inView && ref.current) {
+      const node = ref.current;
+      const controls = animate(0, targetValue, {
+        duration,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          const formatted = latest.toFixed(targetValue % 1 === 0 ? 0 : 1);
+          node.textContent = `${prefix}${formatted}${suffix}`;
+        }
+      });
+      return () => controls.stop();
     }
-  }, [inView, targetValue, motionValue]);
+  }, [inView, targetValue, prefix, suffix, duration]);
 
-  useEffect(() => {
-    springValue.on('change', (latest) => {
-      if (ref.current) {
-        // Handle decimals if necessary, otherwise floor
-        const formatted = latest.toFixed(targetValue % 1 === 0 ? 0 : 1);
-        ref.current.textContent = `${prefix}${formatted}${suffix}`;
-      }
-    });
-  }, [springValue, prefix, suffix, targetValue]);
-
-  return <span ref={ref} className="tabular-nums">0{suffix}</span>;
+  return <span ref={ref} className="tabular-nums">{prefix}0{suffix}</span>;
 }
