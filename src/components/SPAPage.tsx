@@ -301,7 +301,7 @@ export default function SPAPage() {
   };
 
   return (
-    <div style={{ background: "transparent", color: "#ffffff", minHeight: "100vh", position: "relative" }}>
+    <div style={{ background: "transparent", color: "#ffffff", minHeight: "100vh", position: "relative", zIndex: 10 }}>
       <div style={{ position: "relative", zIndex: 10 }}>
         <NavSPA />
 
@@ -428,7 +428,8 @@ export default function SPAPage() {
             right: 0,
             height: "120px",
             background: "linear-gradient(to bottom, transparent, #000000)",
-            pointerEvents: "none",
+            zIndex: 0,
+            pointerEvents: 'none',
           }}
         />
       </section>
