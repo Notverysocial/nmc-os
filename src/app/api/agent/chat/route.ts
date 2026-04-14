@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-// @ts-expect-error — resolved at build-time after `npm install @anthropic-ai/sdk`
 import Anthropic from "@anthropic-ai/sdk";
 
 export const runtime = "nodejs";
