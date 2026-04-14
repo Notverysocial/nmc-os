@@ -54,7 +54,7 @@ export default function QuizSection() {
             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
               style={{ width: "100%", padding: "14px", background: "#ffffff", color: "#000000", border: "none", fontFamily: "var(--font-inter)", fontSize: "14px", fontWeight: 700, cursor: "pointer", letterSpacing: "0.03em" }}>
-              Get Your Full Hidden Revenue Report \u2192
+              Get Your Full Hidden Revenue Report {"\u2192"}
             </motion.button>
           </motion.div>
         )}

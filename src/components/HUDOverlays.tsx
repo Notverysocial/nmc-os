@@ -30,7 +30,7 @@ export function LiveFeed() {
   useEffect(() => { const interval = setInterval(() => { setCurrent((prev) => (prev + 1) % feedItems.length); }, 3000); return () => clearInterval(interval); }, []);
   return (
     <div style={{ position: "fixed", bottom: "16px", left: "16px", zIndex: 40, fontFamily: "var(--font-jetbrains)", fontSize: "10px", color: "rgba(100,140,200,0.35)", letterSpacing: "0.06em", maxWidth: "320px", display: "none" }} className="md:block hidden">
-      <span style={{ color: "rgba(59,130,246,0.4)", marginRight: "6px" }}>\u25cf</span>{feedItems[current]}
+      <span style={{ color: "rgba(59,130,246,0.4)", marginRight: "6px" }}>{"\u25cf"}</span>{feedItems[current]}
     </div>
   );
 }

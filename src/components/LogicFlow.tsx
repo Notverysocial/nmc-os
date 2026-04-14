@@ -19,7 +19,7 @@ export default function LogicFlow() {
           <div style={{ fontFamily: "var(--font-inter)", fontSize: "14px", fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: "0.03em", marginBottom: "6px" }}>{step.label}</div>
           <div style={{ fontFamily: "var(--font-inter)", fontSize: "12px", color: "#999", lineHeight: 1.5 }}>{step.desc}</div>
           {i < steps.length - 1 && (
-            <div className="hidden md:block" style={{ position: "absolute", right: "-8px", top: "50%", transform: "translateY(-50%)", color: "rgba(26,43,80,0.6)", fontFamily: "var(--font-jetbrains)", fontSize: "16px", zIndex: 2 }}>\u2192</div>
+            <div className="hidden md:block" style={{ position: "absolute", right: "-8px", top: "50%", transform: "translateY(-50%)", color: "rgba(26,43,80,0.6)", fontFamily: "var(--font-jetbrains)", fontSize: "16px", zIndex: 2 }}>{"\u2192"}</div>
           )}
         </motion.div>
       ))}

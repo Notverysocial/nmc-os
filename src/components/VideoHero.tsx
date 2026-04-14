@@ -16,7 +16,7 @@ export default function VideoHero() {
     <section style={{ position: "relative", width: "100%", background: "#000", borderBottom: "1px solid rgba(26,43,80,0.3)", overflow: "hidden" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "2rem 1rem 0" }}>
         <div style={{ fontFamily: "var(--font-jetbrains)", fontSize: "10px", letterSpacing: "0.15em", color: "rgba(100,140,200,0.6)", textTransform: "uppercase", marginBottom: "0.75rem", textAlign: "center" }}>
-          // CLASSIFIED_BRIEFING \u2014 WATCH BEFORE SCROLLING
+          {"// CLASSIFIED_BRIEFING \u2014 WATCH BEFORE SCROLLING"}
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.3 }}
           style={{ position: "relative", width: "100%", paddingBottom: "56.25%", background: "#0a0a0a", border: "1px solid rgba(26,43,80,0.4)", overflow: "hidden" }}>

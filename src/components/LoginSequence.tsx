@@ -50,7 +50,7 @@ export default function LoginSequence({ onComplete }: { onComplete: () => void }
             {lines.map((line, i) => (
               <motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2 }}
                 style={{ fontFamily: "var(--font-jetbrains)", fontSize: "13px", color: i === lines.length - 1 && i === bootLines.length - 1 ? "#ffffff" : "#666666", marginBottom: "6px", letterSpacing: "0.03em" }}>
-                <span style={{ color: "rgba(59,130,246,0.5)", marginRight: "8px" }}>\u203a</span>
+                <span style={{ color: "rgba(59,130,246,0.5)", marginRight: "8px" }}>{"\u203a"}</span>
                 {line}
               </motion.div>
             ))}
