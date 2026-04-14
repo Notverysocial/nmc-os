@@ -63,10 +63,17 @@
   --card-bg: rgba(255, 255, 255, 0.02);
 }
 
+/*
+ * Keep box-sizing reset only. The previous `padding: 0; margin: 0` was
+ * UNLAYERED, which in Tailwind v4's cascade-layers model silently beats
+ * every `.mt-*`, `.mb-*`, `.p-*`, `.gap-*`, `.space-y-*` utility — they
+ * all live in `@layer utilities`. Unlayered styles always win over
+ * layered ones regardless of specificity, so the whole spacing system
+ * was computing to 0px. Tailwind's preflight handles per-element
+ * resets appropriately; we don't need to nuke every element's margins.
+ */
 * {
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 html {
