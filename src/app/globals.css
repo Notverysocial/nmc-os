@@ -24,7 +24,15 @@
   --animate-ticker: ticker 40s linear infinite;
   --animate-pulse-glow: pulseGlow 6s ease-in-out infinite;
   --animate-scan-sweep: scanSweep 12s linear infinite;
+  --animate-glitch: glitch 0.3s cubic-bezier(.25,.46,.45,.94) infinite;
 
+  @keyframes glitch {
+    0% { transform: translate(0); text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+    25% { transform: translate(-2px, 2px); text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+    50% { transform: translate(2px, -2px); text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+    75% { transform: translate(-2px, -2px); text-shadow: 2px 0 #ff00c1, -2px 0 #00fff9; }
+    100% { transform: translate(0); text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9; }
+  }
   @keyframes ticker {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }

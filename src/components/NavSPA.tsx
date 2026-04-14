@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Volume2, VolumeX } from "lucide-react";
 
 const navLinks = [
   { href: "#problem", label: "The Problem" },
@@ -15,12 +15,22 @@ const navLinks = [
 export default function NavSPA() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
+    const savedSound = localStorage.getItem('nexus_sound') === 'true';
+    setSoundEnabled(savedSound);
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const toggleSound = () => {
+    const nextState = !soundEnabled;
+    setSoundEnabled(nextState);
+    localStorage.setItem('nexus_sound', String(nextState));
+  };
 
   const scrollTo = (id: string) => {
     const el = document.querySelector(id);
@@ -58,23 +68,40 @@ export default function NavSPA() {
               height: "64px",
             }}
           >
-            {/* Logo */}
-            <button
-              onClick={() => scrollTo("#hero")}
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "var(--font-jetbrains)",
-                fontSize: "16px",
-                fontWeight: 600,
-                color: "#ffffff",
-                letterSpacing: "0.1em",
-                padding: "0",
-              }}
-            >
-              NEXUS
-            </button>
+            {/* Logo & Pathway */}
+            <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+              <button
+                onClick={() => scrollTo("#hero")}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "var(--font-jetbrains)",
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  color: "#ffffff",
+                  letterSpacing: "0.1em",
+                  padding: "0",
+                }}
+              >
+                NEXUS
+              </button>
+              
+              <div 
+                className="hidden lg:flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-sm"
+                style={{ opacity: scrolled ? 1 : 0.5, transition: 'opacity 0.3s' }}
+              >
+                <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">
+                  Path:
+                </span>
+                <span className="text-[10px] font-mono text-blue-400 tracking-widest uppercase">
+                  {scrolled ? "OS > RUNTIME > " : "OS > INITIALIZING"}
+                </span>
+                <span className="text-[10px] font-mono text-white/60 tracking-widest uppercase animate-pulse">
+                  {scrolled ? "ACTIVE" : "IDLE"}
+                </span>
+              </div>
+            </div>
 
             {/* Desktop Nav */}
             <nav
@@ -108,8 +135,36 @@ export default function NavSPA() {
               ))}
             </nav>
 
-            {/* Right — Client Login */}
-            <div style={{ display: "flex", alignItems: "center", gap: "12px" }} className="hidden md:flex">
+            {/* Right — Client Login & Audio */}
+            <div style={{ display: "flex", alignItems: "center", gap: "20px" }} className="hidden md:flex">
+              <button
+                onClick={toggleSound}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "4px",
+                  opacity: 0.6,
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
+                title={soundEnabled ? "Disable UI Audio" : "Enable UI Audio"}
+              >
+                {soundEnabled ? <Volume2 size={16} color="#3b82f6" /> : <VolumeX size={16} color="#666666" />}
+                <span style={{ 
+                  fontFamily: "var(--font-jetbrains)", 
+                  fontSize: "9px", 
+                  color: soundEnabled ? "#3b82f6" : "#666666",
+                  letterSpacing: "0.1em"
+                }}>
+                  AUDIO: {soundEnabled ? "ON" : "OFF"}
+                </span>
+              </button>
+
               <a
                 href="https://app.newmindsetcontent.com"
                 target="_blank"

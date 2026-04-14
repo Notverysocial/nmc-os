@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { useInView, animate } from 'framer-motion';
+import { useInView, animate, motion } from 'framer-motion';
 
 interface AnimatedCounterProps {
   value?: number;
@@ -37,5 +37,25 @@ export default function AnimatedCounter({
     }
   }, [inView, targetValue, prefix, suffix, duration]);
 
-  return <span ref={ref} className="tabular-nums">{prefix}0{suffix}</span>;
+  return (
+    <div className="flex flex-col items-center">
+      <span ref={ref} className="tabular-nums font-mono text-4xl font-bold text-white mb-2">
+        {prefix}0{suffix}
+      </span>
+      <div className="w-24 h-1 bg-white/5 rounded-full overflow-hidden relative">
+        <motion.div 
+          initial={{ x: "-100%" }}
+          whileInView={{ x: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute inset-0 bg-blue-500/40"
+        />
+        {/* Sparkline dots */}
+        <div className="absolute inset-y-0 left-0 w-full flex justify-between px-1">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="w-[1px] h-full bg-white/10" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,18 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
     }
 
-    const logPath = path.join(process.cwd(), "src/data/contact-log.json");
-    
-    // Ensure file exists
-    let logs = [];
-    try {
-      const fileContents = await fs.readFile(logPath, "utf-8");
-      logs = JSON.parse(fileContents);
-    } catch (e) {
-      // If file doesn't exist, logs stays as empty array
-    }
-
-    const newLog = {
+    const payload = {
       name,
       email,
       company,
@@ -31,12 +18,29 @@ export async function POST(req: NextRequest) {
       message,
       timestamp: new Date().toISOString(),
       sourcePagePath: "/",
+      environment: process.env.NODE_ENV || "unknown"
     };
 
-    logs.push(newLog);
-    
-    // Using atomic write (though not strictly necessary here, it's safer)
-    await fs.writeFile(logPath, JSON.stringify(logs, null, 2), "utf-8");
+    // 1. VERCEL PRODUCTION LOGGING (Safe, persistent via Datadog/Vercel Logs)
+    console.log("[NEXUS_LEAD_CAPTURE_SUCCESS]", JSON.stringify(payload));
+
+    // 2. EXTERNAL WEBHOOK (If configured in Vercel Environment Variables)
+    const webhookUrl = process.env.LEAD_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        console.log(`[NEXUS_WEBHOOK_DISPATCHED] Lead forwarded to ${webhookUrl}`);
+      } catch (webhookErr) {
+        console.error("[NEXUS_WEBHOOK_FAILED] Failed to forward lead:", webhookErr);
+        // Do not throw; we already caught the lead in stdout and want to return success to the UI.
+      }
+    } else {
+      console.warn("[NEXUS_SYSTEM_WARNING] No LEAD_WEBHOOK_URL configured. Lead exists in Vercel runtime logs only.");
+    }
 
     return NextResponse.json({ success: true, message: "Lead captured successfully." });
   } catch (err) {
