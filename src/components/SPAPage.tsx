@@ -812,29 +812,29 @@ export default function SPAPage() {
               <p>Just a conversation about what your business could look like in 12 months if you made one smart move this week instead of waiting to see what everybody else does.</p>
             </NarrativeBlock>
             
-            <div className="mt-24 border-t border-white/5 pt-12 space-y-12">
+            <div className="mt-32 border-t border-white/5 pt-16 space-y-20">
               <motion.div variants={fadeUp} style={{ fontFamily: "var(--font-playfair)", color: "#FFFFFF", opacity: 0.7 }}>
-                <p className="text-xl md:text-2xl leading-relaxed italic mb-6">
+                <p className="text-xl md:text-2xl italic mb-10" style={{ lineHeight: 1.8 }}>
                   P.S. I want to tell you one more thing, because I think it's the real reason you should do this.
-                  Every person who reads a letter like this one tells themselves the same thing: "This is interesting, I'll think about it." 
-                  And then they close the tab, get back to their inbox, and six months later they read another letter like this one, 
+                  Every person who reads a letter like this one tells themselves the same thing: "This is interesting, I'll think about it."
+                  And then they close the tab, get back to their inbox, and six months later they read another letter like this one,
                   and they tell themselves the same thing again.
                 </p>
-                <p className="text-xl md:text-2xl leading-relaxed italic">
-                  The only thing that guy did differently was he stopped thinking about it. The people who move now will look like geniuses 
+                <p className="text-xl md:text-2xl italic" style={{ lineHeight: 1.8 }}>
+                  The only thing that guy did differently was he stopped thinking about it. The people who move now will look like geniuses
                   in 24 months. The people who wait will be asking the people who moved for a job.
                 </p>
-                <p className="text-2xl font-bold mt-8 text-white">— Antonio</p>
+                <p className="text-2xl font-bold mt-10 text-white">— Antonio</p>
               </motion.div>
 
-              <motion.div 
-                variants={fadeUp} 
-                className="pt-4"
+              <motion.div
+                variants={fadeUp}
+                className="pt-6"
                 style={{ fontFamily: "var(--font-playfair)", color: "#FFFFFF", opacity: 0.7 }}
               >
-                <p className="text-xl leading-relaxed italic">
-                  <strong>P.P.S. One more thing.</strong> If you read all of this and the part that stuck with you was the line about 
-                  turning your worst spreadsheet into software, write me back and just say "spreadsheet." 
+                <p className="text-xl italic" style={{ lineHeight: 1.8 }}>
+                  <strong>P.P.S. One more thing.</strong> If you read all of this and the part that stuck with you was the line about
+                  turning your worst spreadsheet into software, write me back and just say "spreadsheet."
                   I'll know what you mean. That's one of the fastest wins we do.
                 </p>
               </motion.div>

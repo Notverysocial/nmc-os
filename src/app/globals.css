@@ -161,7 +161,7 @@ body::before {
 
 /* Narrative prose rhythm — breathing room between paragraphs in VSL copy */
 .narrative-prose p {
-  margin: 1.35rem 0;
+  margin: 1.85rem 0;
 }
 .narrative-prose p:first-child { margin-top: 0; }
 .narrative-prose p:last-child { margin-bottom: 0; }
