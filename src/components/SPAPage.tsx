@@ -132,10 +132,20 @@ function SectionHeading({ children, className = "" }: { children: React.ReactNod
 export default function SPAPage() {
   const [isBooting, setIsBooting] = useState(true);
   const [formData, setFormData] = useState<Record<string, string>>({});
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("[Contact form]", formData);
+    setStatus("submitting");
+    try {
+      // TODO (DEPLOY-03): wire Supabase here
+      console.log("[Contact form]", formData);
+      await new Promise((r) => setTimeout(r, 600));
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
 
   return (
