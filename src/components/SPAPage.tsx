@@ -22,6 +22,7 @@ import VideoHero from "./VideoHero";
 import NeuralCursor from "./NeuralCursor";
 import NarrativeBlock from "./NarrativeBlock";
 import GhostEmployeeHUD from "./GhostEmployeeHUD";
+import NovaDock from "./NovaDock";
 import { Canvas } from "@react-three/fiber";
 import { useDecryptText } from "../hooks/useDecryptText";
 
@@ -155,6 +156,7 @@ export default function SPAPage() {
 
       <LoginSequence onComplete={() => setIsBooting(false)} />
       <GhostEmployeeHUD open={hudOpen} onClose={() => setHudOpen(false)} />
+      {!isBooting && <NovaDock onClick={() => setHudOpen(true)} visible={!hudOpen} />}
 
       <motion.div
         initial={{ opacity: 0 }}
