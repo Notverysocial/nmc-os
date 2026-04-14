@@ -13,9 +13,9 @@ export default function NarrativeBlock({ id, metadataLabel, children }: Narrativ
   return (
     <motion.div id={id} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} style={{ position: "relative" }}>
       {metadataLabel && (
-        <div style={{ fontFamily: "var(--font-jetbrains)", fontSize: "9px", letterSpacing: "0.15em", color: "rgba(100,140,200,0.4)", textTransform: "uppercase", marginBottom: "1.5rem" }}>{metadataLabel}</div>
+        <div style={{ fontFamily: "var(--font-jetbrains)", fontSize: "9px", letterSpacing: "0.15em", color: "rgba(100,140,200,0.4)", textTransform: "uppercase", marginBottom: "2.5rem" }}>{metadataLabel}</div>
       )}
-      <div className="narrative-prose" style={{ fontFamily: "var(--font-inter)", fontSize: "16px", lineHeight: 1.75, color: "#cccccc" }}>{children}</div>
+      <div className="narrative-prose" style={{ fontFamily: "var(--font-inter)", fontSize: "17px", lineHeight: 1.95, letterSpacing: "0.3px", color: "#cccccc", maxWidth: "65ch" }}>{children}</div>
     </motion.div>
   );
 }

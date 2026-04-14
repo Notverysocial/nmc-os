@@ -158,3 +158,12 @@ body::before {
   pointer-events: none;
   animation: pulseGlow 8s ease-in-out infinite;
 }
+
+/* Narrative prose rhythm — breathing room between paragraphs in VSL copy */
+.narrative-prose p {
+  margin: 1.35rem 0;
+}
+.narrative-prose p:first-child { margin-top: 0; }
+.narrative-prose p:last-child { margin-bottom: 0; }
+.narrative-prose strong { color: #ffffff; font-weight: 600; }
+.narrative-prose em { color: #e8e8e8; }

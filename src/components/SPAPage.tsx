@@ -21,6 +21,7 @@ import KernelTooltip from "./KernelTooltip";
 import VideoHero from "./VideoHero";
 import NeuralCursor from "./NeuralCursor";
 import NarrativeBlock from "./NarrativeBlock";
+import GhostEmployeeHUD from "./GhostEmployeeHUD";
 import { Canvas } from "@react-three/fiber";
 import { useDecryptText } from "../hooks/useDecryptText";
 
@@ -133,6 +134,7 @@ export default function SPAPage() {
   const [isBooting, setIsBooting] = useState(true);
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [hudOpen, setHudOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -152,8 +154,9 @@ export default function SPAPage() {
     <>
 
       <LoginSequence onComplete={() => setIsBooting(false)} />
-      
-      <motion.div 
+      <GhostEmployeeHUD open={hudOpen} onClose={() => setHudOpen(false)} />
+
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isBooting ? 0 : 1 }}
         transition={{ duration: 1.5, staggerChildren: 0.1 }}
@@ -242,7 +245,7 @@ export default function SPAPage() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => setHudOpen(true)}
                 className="hover:animate-glitch"
                 style={{
                   background: "#ffffff",
@@ -256,7 +259,7 @@ export default function SPAPage() {
                   letterSpacing: "0.02em",
                 }}
               >
-                Get Your Hidden Revenue Report
+                Talk to Nova → Meet Your Ghost Employee
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.03 }}
