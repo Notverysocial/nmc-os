@@ -21,6 +21,7 @@ const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/leads", label: "Leads CRM", icon: Users },
   { href: "/admin/pipeline", label: "Pipeline", icon: Kanban },
+  { href: "/admin/nova", label: "Nova Transcripts", icon: Bot },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

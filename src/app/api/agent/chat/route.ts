@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -66,7 +67,32 @@ function validateMessages(messages: unknown): messages is Message[] {
 }
 
 export async function POST(req: NextRequest) {
-  // TODO: rate limit by IP (upstash or in-memory LRU)
+  // Rate limit check by IP
+  const clientIp = getClientIp(req);
+  const rateLimitResult = await checkRateLimit(clientIp);
+
+  if (!rateLimitResult.allowed) {
+    const retryAfterSeconds = Math.ceil(
+      (rateLimitResult.resetAt - Date.now()) / 1000
+    );
+    return NextResponse.json(
+      {
+        error: "rate_limited",
+        reason: rateLimitResult.reason || "minute_limit",
+        reset_at: rateLimitResult.resetAt,
+        retry_after_seconds: retryAfterSeconds,
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(retryAfterSeconds),
+          "X-RateLimit-Limit": "20",
+          "X-RateLimit-Remaining": "0",
+          "X-RateLimit-Reset": String(Math.floor(rateLimitResult.resetAt / 1000)),
+        },
+      }
+    );
+  }
 
   try {
     const body = await req.json() as unknown;
@@ -124,6 +150,9 @@ export async function POST(req: NextRequest) {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
         "Cache-Control": "no-store",
+        "X-RateLimit-Limit": "20",
+        "X-RateLimit-Remaining": String(rateLimitResult.remaining),
+        "X-RateLimit-Reset": String(Math.floor(rateLimitResult.resetAt / 1000)),
       },
     });
   } catch (err) {

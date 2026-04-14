@@ -22,6 +22,10 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
   const [showCTA, setShowCTA] = useState(false);
   const [messageCount, setMessageCount] = useState(0);
   const [openingRevealed, setOpeningRevealed] = useState(false);
+  const [emailCaptured, setEmailCaptured] = useState(false);
+  const [emailSubmitting, setEmailSubmitting] = useState(false);
+  const [emailValue, setEmailValue] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -80,16 +84,49 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
     }
   }, [input]);
 
+  // Post session to lead endpoint (fire-and-forget)
+  const postLeadCapture = useCallback(
+    async (
+      sessionMessages: Message[],
+      email?: string,
+      booked?: boolean
+    ) => {
+      try {
+        await fetch("/api/agent/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: sessionId,
+            email: email || undefined,
+            messages: sessionMessages,
+            booked: booked || false,
+          }),
+        });
+      } catch (error) {
+        console.error("[Nova] Lead capture failed:", error);
+        // Don't block user flow if lead endpoint is down
+      }
+    },
+    [sessionId]
+  );
+
   const handleSendMessage = useCallback(async () => {
     if (!input.trim() || loading) return;
 
     const userMessage: Message = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const newMessages = [...messages, userMessage];
+
+    setMessages(newMessages);
     setInput("");
     setLoading(true);
 
     const newMessageCount = messageCount + 1;
     setMessageCount(newMessageCount);
+
+    // Post "conversation started" ping on first user message (pre-stream)
+    if (newMessageCount === 1) {
+      postLeadCapture(newMessages, "");
+    }
 
     // Check if we should show CTA after this exchange
     if (newMessageCount >= 5) {
@@ -97,14 +134,13 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
     }
 
     try {
-      const conversationForAPI = [...messages, userMessage];
       const startTime = performance.now();
 
       const response = await fetch("/api/agent/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: conversationForAPI,
+          messages: newMessages,
         }),
       });
 
@@ -163,7 +199,35 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
     } finally {
       setLoading(false);
     }
-  }, [input, loading, messages, messageCount]);
+  }, [input, loading, messages, messageCount, postLeadCapture]);
+
+  // Handle email submission
+  const handleEmailSubmit = useCallback(async () => {
+    if (!emailValue.trim() || emailSubmitting) return;
+
+    setEmailError(null);
+    setEmailSubmitting(true);
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailValue)) {
+      setEmailError("Please enter a valid email address");
+      setEmailSubmitting(false);
+      return;
+    }
+
+    // Post to lead endpoint
+    await postLeadCapture(messages, emailValue, false);
+
+    setEmailCaptured(true);
+    setEmailSubmitting(false);
+  }, [emailValue, emailSubmitting, postLeadCapture, messages]);
+
+  // Handle Calendly click (booked=true)
+  const handleCalendlyClick = useCallback(() => {
+    // Fire-and-forget POST to mark as booked
+    postLeadCapture(messages, emailValue, true);
+  }, [postLeadCapture, messages, emailValue]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -463,7 +527,104 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
                   SEND →
                 </button>
               </div>
+            ) : !emailCaptured ? (
+              // Email gate
+              <div
+                style={{
+                  padding: "1.5rem",
+                  borderTop: "1px solid rgba(59,130,246,0.1)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: "13px",
+                    color: "rgba(255,255,255,0.8)",
+                    marginBottom: "0.5rem",
+                  }}
+                >
+                  Ready to book? Drop your email to continue.
+                </div>
+                <div style={{ display: "flex", gap: "0.75rem" }}>
+                  <input
+                    type="email"
+                    value={emailValue}
+                    onChange={(e) => setEmailValue(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !emailSubmitting) {
+                        handleEmailSubmit();
+                      }
+                    }}
+                    placeholder="your@email.com"
+                    disabled={emailSubmitting}
+                    style={{
+                      flex: 1,
+                      padding: "0.75rem 1rem",
+                      backgroundColor: "rgba(59,130,246,0.05)",
+                      border: "1px solid rgba(59,130,246,0.2)",
+                      borderRadius: "6px",
+                      color: "#ffffff",
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "14px",
+                      outline: "none",
+                      transition: "border 0.2s",
+                    }}
+                    onFocus={(e) => {
+                      (e.target as HTMLInputElement).style.borderColor = "rgba(59,130,246,0.4)";
+                    }}
+                    onBlur={(e) => {
+                      (e.target as HTMLInputElement).style.borderColor = "rgba(59,130,246,0.2)";
+                    }}
+                  />
+                  <button
+                    onClick={handleEmailSubmit}
+                    disabled={!emailValue.trim() || emailSubmitting}
+                    style={{
+                      padding: "0.75rem 1.5rem",
+                      backgroundColor: !emailValue.trim() || emailSubmitting ? "rgba(255,255,255,0.2)" : "#ffffff",
+                      color: !emailValue.trim() || emailSubmitting ? "rgba(0,0,0,0.4)" : "#000000",
+                      border: "none",
+                      borderRadius: "6px",
+                      fontFamily: "var(--font-jetbrains)",
+                      fontSize: "12px",
+                      fontWeight: "bold",
+                      cursor: !emailValue.trim() || emailSubmitting ? "not-allowed" : "pointer",
+                      whiteSpace: "nowrap",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!(!emailValue.trim() || emailSubmitting)) {
+                        (e.target as HTMLButtonElement).style.backgroundColor = "#ffffff";
+                        (e.target as HTMLButtonElement).style.transform = "scale(1.05)";
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!(!emailValue.trim() || emailSubmitting)) {
+                        (e.target as HTMLButtonElement).style.backgroundColor = "#ffffff";
+                        (e.target as HTMLButtonElement).style.transform = "scale(1)";
+                      }
+                    }}
+                  >
+                    {emailSubmitting ? "..." : "Reveal →"}
+                  </button>
+                </div>
+                {emailError && (
+                  <div
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "12px",
+                      color: "#ff6b6b",
+                    }}
+                  >
+                    {emailError}
+                  </div>
+                )}
+              </div>
             ) : (
+              // Calendly CTA (after email captured)
               <div
                 style={{
                   padding: "2rem",
@@ -496,6 +657,7 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
                   href="https://calendly.com/neonbeachclub/strategy-call"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleCalendlyClick}
                   style={{
                     display: "inline-block",
                     padding: "0.75rem 1.5rem",

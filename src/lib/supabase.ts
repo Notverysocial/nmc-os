@@ -1,13 +1,30 @@
 import { createClient } from "@supabase/supabase-js";
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-export const isSupabaseConfigured = !!(url && key);
+export const isSupabaseConfigured = !!(url && anonKey);
 
-export const supabase = isSupabaseConfigured
-  ? createClient(url!, key!)
+// Anonymous client (read-only, RLS enforced)
+export const supabaseAnon = isSupabaseConfigured
+  ? createClient(url!, anonKey!)
   : null;
+
+// Back-compat alias — existing admin/leads routes import `supabase`.
+// Keep this export so those routes don't break after the Nova refactor.
+export const supabase = supabaseAnon;
+
+// Admin client (server-only, uses service role key, bypasses RLS)
+export function getSupabaseAdmin() {
+  if (!url || !serviceRoleKey) {
+    console.warn("[Supabase] Admin client not configured: missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+    return null;
+  }
+  return createClient(url, serviceRoleKey);
+}
+
+export const supabaseAdmin = getSupabaseAdmin();
 
 export type LeadStatus =
   | "New"
