@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
 interface NovaDockProps {
   onClick: () => void;
@@ -12,6 +11,7 @@ interface NovaDockProps {
  * Persistent, always-visible Nova trigger.
  * Fixed bottom-right. Hides while the HUD is open so it doesn't stack.
  * Fades in once the user has scrolled past the hero so it doesn't compete with the hero CTA.
+ * Uses plain CSS transitions (not framer-motion) for bulletproof mount/animate behavior.
  */
 export default function NovaDock({ onClick, visible = true }: NovaDockProps) {
   const [scrolled, setScrolled] = useState(false);
@@ -28,20 +28,11 @@ export default function NovaDock({ onClick, visible = true }: NovaDockProps) {
   const show = visible && scrolled;
 
   return (
-    <motion.button
+    <button
       onClick={onClick}
-      initial={false}
-      animate={{
-        opacity: show ? 1 : 0,
-        y: show ? 0 : 24,
-        scale: show ? 1 : 0.92,
-        pointerEvents: show ? "auto" : "none",
-      }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={show ? { scale: 1.03 } : undefined}
-      whileTap={show ? { scale: 0.97 } : undefined}
       aria-hidden={!show}
       aria-label="Talk to Nova — Diagnostic Scout"
+      tabIndex={show ? 0 : -1}
       style={{
         position: "fixed",
         bottom: "24px",
@@ -59,11 +50,22 @@ export default function NovaDock({ onClick, visible = true }: NovaDockProps) {
         boxShadow:
           "0 8px 32px rgba(0,0,0,0.7), 0 0 24px rgba(59,130,246,0.18), inset 0 1px 0 rgba(255,255,255,0.04)",
         color: "#ffffff",
-        cursor: "pointer",
+        cursor: show ? "pointer" : "default",
         fontFamily: "var(--font-jetbrains), monospace",
         fontSize: "11px",
         letterSpacing: "0.14em",
         textTransform: "uppercase",
+        opacity: show ? 1 : 0,
+        transform: show ? "translateY(0) scale(1)" : "translateY(24px) scale(0.92)",
+        pointerEvents: show ? "auto" : "none",
+        transition:
+          "opacity 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.35s cubic-bezier(0.16,1,0.3,1)",
+      }}
+      onMouseEnter={(e) => {
+        if (show) (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px) scale(1.03)";
+      }}
+      onMouseLeave={(e) => {
+        if (show) (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0) scale(1)";
       }}
     >
       {/* pulsing avatar */}
@@ -86,16 +88,15 @@ export default function NovaDock({ onClick, visible = true }: NovaDockProps) {
         }}
       >
         01
-        <motion.span
+        <span
           aria-hidden
-          animate={{ opacity: [0.35, 0.9, 0.35], scale: [1, 1.35, 1] }}
-          transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
           style={{
             position: "absolute",
             inset: "-4px",
             borderRadius: "50%",
             border: "1px solid rgba(59,130,246,0.55)",
             pointerEvents: "none",
+            animation: "novaDockPing 2.6s ease-in-out infinite",
           }}
         />
         <span
@@ -115,10 +116,15 @@ export default function NovaDock({ onClick, visible = true }: NovaDockProps) {
 
       <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1.2 }}>
         <span style={{ color: "rgba(100,140,200,0.75)", fontSize: "9px" }}>AGENT_01 // ONLINE</span>
-        <span style={{ color: "#ffffff", fontSize: "12px", letterSpacing: "0.1em" }}>
-          Talk to Nova
-        </span>
+        <span style={{ color: "#ffffff", fontSize: "12px", letterSpacing: "0.1em" }}>Talk to Nova</span>
       </span>
-    </motion.button>
+
+      <style>{`
+        @keyframes novaDockPing {
+          0%, 100% { opacity: 0.35; transform: scale(1); }
+          50% { opacity: 0.9; transform: scale(1.35); }
+        }
+      `}</style>
+    </button>
   );
 }
