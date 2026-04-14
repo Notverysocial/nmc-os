@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const bootLines = [
@@ -18,6 +18,11 @@ const bootLines = [
 export default function LoginSequence({ onComplete }: { onComplete: () => void }) {
   const [lines, setLines] = useState<string[]>([]);
   const [done, setDone] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     let i = 0;
@@ -28,11 +33,11 @@ export default function LoginSequence({ onComplete }: { onComplete: () => void }
       } else {
         clearInterval(interval);
         setTimeout(() => setDone(true), 600);
-        setTimeout(() => onComplete(), 1200);
+        setTimeout(() => onCompleteRef.current(), 1200);
       }
     }, 180);
     return () => clearInterval(interval);
-  }, [onComplete]);
+  }, []);
 
   return (
     <AnimatePresence>

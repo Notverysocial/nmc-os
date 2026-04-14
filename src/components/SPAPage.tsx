@@ -351,7 +351,7 @@ export default function SPAPage() {
               <p>Don't take my word for it. Take theirs.</p>
             </NarrativeBlock>
           </div>
-          <div className="col-span-1 md:col-span-7 sticky top-24 md:top-32 self-start -z-10 md:z-10 opacity-70 md:opacity-100 mix-blend-screen md:mix-blend-normal">
+          <div className="col-span-1 md:col-span-7 relative z-10">
             <GlassCard>
               <motion.div variants={fadeUp}>
                 <Pill label="[ THE STORM ]" sec="03" />
@@ -390,7 +390,7 @@ export default function SPAPage() {
               <p><strong>That's the storm. And it's not coming. It's already here.</strong></p>
             </NarrativeBlock>
           </div>
-          <div className="col-span-1 md:col-span-7 sticky top-24 md:top-32 self-start -z-10 md:z-10 opacity-70 md:opacity-100 mix-blend-screen md:mix-blend-normal mt-0 md:mt-32">
+          <div className="col-span-1 md:col-span-7 relative z-10 mt-0 md:mt-32">
             <GlassCard>
               <motion.div variants={fadeUp}>
                 <Pill label="[ FASCINATION BULLETS ]" sec="06" />
@@ -499,7 +499,7 @@ export default function SPAPage() {
               <p>We call it NEXUS. It's not a website and it's not software. <strong>It's an operating system for your business — and the ghost employees come with it.</strong></p>
             </NarrativeBlock>
           </div>
-          <div className="col-span-1 md:col-span-7 sticky top-24 md:top-32 self-start -z-10 md:z-10 opacity-70 md:opacity-100 mix-blend-screen md:mix-blend-normal mt-0 md:mt-32">
+          <div className="col-span-1 md:col-span-7 relative z-10 mt-0 md:mt-32">
             <GlassCard>
               <motion.div variants={fadeUp}>
                 <Pill label="[ THE TURN ]" sec="04" />
@@ -621,7 +621,7 @@ export default function SPAPage() {
               </div>
             </NarrativeBlock>
           </div>
-          <div className="col-span-1 md:col-span-7 sticky top-24 md:top-32 self-start -z-10 md:z-10 opacity-70 md:opacity-100 mix-blend-screen md:mix-blend-normal mt-0 md:mt-32 space-y-12">
+          <div className="col-span-1 md:col-span-7 relative z-10 mt-0 md:mt-32 space-y-12">
             <GlassCard>
               <motion.div variants={fadeUp}>
                 <Pill label="[ THE LAND GRAB ]" sec="06" />
@@ -836,7 +836,7 @@ export default function SPAPage() {
             </div>
             
           </div>
-          <div className="col-span-1 md:col-span-7 sticky top-24 md:top-32 self-start md:z-10 opacity-100 mt-0 md:mt-32 space-y-12">
+          <div className="col-span-1 md:col-span-7 relative z-10 mt-0 md:mt-32 space-y-12">
             
             <GlassCard>
                 <motion.div
