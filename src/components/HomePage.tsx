@@ -555,14 +555,15 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <motion.p variants={staggerItemVariants} className="badge badge-gold inline-flex mb-6">
-              Simple Pricing
+              Quote-Based Partnership
             </motion.p>
             <motion.h2 variants={staggerItemVariants} className="display-lg text-white mb-4">
-              Plans start at{" "}
-              <span className="gradient-text-gold">$499/mo</span>
+              Priced to the{" "}
+              <span className="gradient-text-gold">Revenue We Recover</span>
             </motion.h2>
             <motion.p variants={staggerItemVariants} className="text-[#8892A4] text-lg mb-8">
-              No setup fees. No per-seat charges for your team. One flat monthly investment for your entire business OS.
+              No setup fees. No per-seat traps. Every engagement is scoped and
+              quoted to the leaks we find — always less than the role it replaces.
             </motion.p>
             <motion.div variants={staggerItemVariants}>
               <Link

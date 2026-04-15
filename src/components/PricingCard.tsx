@@ -19,7 +19,7 @@ interface PricingCardProps {
 export default function PricingCard({
   tier,
   price,
-  period = "/mo",
+  period,
   description,
   features,
   cta,
@@ -60,24 +60,15 @@ export default function PricingCard({
         </div>
 
         <div className="flex items-end gap-1 mb-3">
-          {enterprise ? (
-            <span
-              className="text-4xl font-bold text-white"
-              style={{ fontFamily: "var(--font-syne)" }}
-            >
-              Custom
-            </span>
-          ) : (
-            <>
-              <span
-                className="text-4xl font-bold text-white"
-                style={{ fontFamily: "var(--font-syne)" }}
-              >
-                {price}
-              </span>
-              <span className="text-[#8892A4] mb-1.5">{period}</span>
-            </>
-          )}
+          <span
+            className="text-3xl font-bold text-white"
+            style={{ fontFamily: "var(--font-syne)" }}
+          >
+            {price}
+          </span>
+          {period ? (
+            <span className="text-[#8892A4] mb-1.5">{period}</span>
+          ) : null}
         </div>
 
         <p className="text-[#8892A4] text-sm leading-relaxed">{description}</p>

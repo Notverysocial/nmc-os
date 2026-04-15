@@ -13,10 +13,12 @@ import {
 
 const plans = [
   {
-    tier: "Starter",
-    price: "$499",
-    description: "For solo operators and small teams ready to automate their core workflows and stop leaving money on the table.",
+    tier: "Foundation",
+    price: "3 Ghost Employees",
+    description:
+      "For solo operators and small teams ready to automate their core workflows and stop leaving money on the table.",
     features: [
+      "3 Ghost Employees",
       "Operations Dashboard (up to 5 users)",
       "Content Calendar & Scheduling",
       "Basic AI Assistant (pre-trained templates)",
@@ -26,14 +28,16 @@ const plans = [
       "Email + chat support",
       "Onboarding call (2 hours)",
     ],
-    cta: "Start with Starter",
+    cta: "Get Your Hidden Revenue Report",
   },
   {
     tier: "Growth",
-    price: "$999",
-    description: "For scaling companies that need a full operational OS — including custom AI, client portals, and advanced analytics.",
+    price: "7 Ghost Employees",
+    description:
+      "For scaling companies that need a full operational OS — custom AI, client portals, and advanced analytics.",
     features: [
-      "Everything in Starter",
+      "7 Ghost Employees",
+      "Everything in Foundation",
       "Unlimited team members",
       "Custom AI Assistant (trained on your data)",
       "Full Client Portal (branded)",
@@ -45,14 +49,16 @@ const plans = [
       "White-glove onboarding (8 hours)",
       "Quarterly strategy reviews",
     ],
-    cta: "Start with Growth",
+    cta: "Book a Strategy Call",
     popular: true,
   },
   {
     tier: "Enterprise",
-    price: "Custom",
-    description: "For multi-location businesses, agencies, and enterprises that need a fully bespoke, white-labeled operations platform.",
+    price: "Unlimited",
+    description:
+      "For multi-location businesses, agencies, and enterprises that need a fully bespoke, white-labeled operations platform.",
     features: [
+      "Unlimited Ghost Employees",
       "Everything in Growth",
       "Fully custom-built workflows",
       "White-label and custom domain",
@@ -65,33 +71,37 @@ const plans = [
       "Monthly strategy sessions",
       "On-site training available",
     ],
-    cta: "Contact Sales",
+    cta: "Contact Us",
     enterprise: true,
   },
 ];
 
 const tableFeatures = [
-  { feature: "Team members", starter: "5", growth: "Unlimited", enterprise: "Unlimited" },
-  { feature: "CRM contacts", starter: "2,500", growth: "25,000", enterprise: "Unlimited" },
-  { feature: "Automation workflows", starter: "10", growth: "Unlimited", enterprise: "Unlimited" },
-  { feature: "AI Assistant", starter: "Templates only", growth: "Custom-trained", enterprise: "Custom models" },
-  { feature: "Client Portal", starter: false, growth: true, enterprise: true },
-  { feature: "White-label", starter: false, growth: false, enterprise: true },
-  { feature: "Custom integrations", starter: false, growth: false, enterprise: true },
-  { feature: "Analytics & Reporting", starter: "Basic", growth: "Advanced", enterprise: "Executive" },
-  { feature: "Support", starter: "Email + chat", growth: "Priority + Slack", enterprise: "Dedicated team" },
-  { feature: "Onboarding", starter: "2 hours", growth: "8 hours", enterprise: "Full team" },
-  { feature: "Strategy sessions", starter: false, growth: "Quarterly", enterprise: "Monthly" },
+  { feature: "Team members", foundation: "5", growth: "Unlimited", enterprise: "Unlimited" },
+  { feature: "CRM contacts", foundation: "2,500", growth: "25,000", enterprise: "Unlimited" },
+  { feature: "Automation workflows", foundation: "10", growth: "Unlimited", enterprise: "Unlimited" },
+  { feature: "AI Assistant", foundation: "Templates only", growth: "Custom-trained", enterprise: "Custom models" },
+  { feature: "Client Portal", foundation: false, growth: true, enterprise: true },
+  { feature: "White-label", foundation: false, growth: false, enterprise: true },
+  { feature: "Custom integrations", foundation: false, growth: false, enterprise: true },
+  { feature: "Analytics & Reporting", foundation: "Basic", growth: "Advanced", enterprise: "Executive" },
+  { feature: "Support", foundation: "Email + chat", growth: "Priority + Slack", enterprise: "Dedicated team" },
+  { feature: "Onboarding", foundation: "2 hours", growth: "8 hours", enterprise: "Full team" },
+  { feature: "Strategy sessions", foundation: false, growth: "Quarterly", enterprise: "Monthly" },
 ];
 
 const faqs = [
   {
+    q: "How does the pricing actually work?",
+    a: "Every engagement is quote-based. We run a diagnostic on your business, identify where revenue is leaking, and propose a scope with a locked-in monthly investment. The price is always less than the role each Ghost Employee replaces — or we don't take the deal.",
+  },
+  {
     q: "Is there a setup fee?",
-    a: "No setup fees on any plan. Your monthly subscription covers everything — platform access, onboarding, and ongoing support.",
+    a: "No setup fees. Your monthly investment covers everything — platform access, custom configuration, onboarding, and ongoing support.",
   },
   {
     q: "Can I cancel anytime?",
-    a: "Yes. All plans are month-to-month. We don't lock you into annual contracts (though we offer discounts for annual commitments if you choose).",
+    a: "Yes. All engagements are month-to-month. We don't lock you into annual contracts (though we offer discounts for annual commitments if you choose).",
   },
   {
     q: "What does 'custom-built' actually mean?",
@@ -150,14 +160,16 @@ export default function PricingPage() {
         <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.div variants={staggerContainerVariants} initial="hidden" animate="visible">
             <motion.p variants={staggerItemVariants} className="badge badge-blue inline-flex mb-6">
-              Transparent Pricing
+              Quote-Based Partnership
             </motion.p>
             <motion.h1 variants={staggerItemVariants} className="display-lg text-white mb-6">
               Invest in Your{" "}
               <span className="gradient-text-blue">Operational Edge</span>
             </motion.h1>
             <motion.p variants={staggerItemVariants} className="text-[#8892A4] text-xl max-w-2xl mx-auto">
-              One flat monthly fee covers your entire custom platform. No hidden costs, no per-seat traps.
+              If we find revenue you are not capturing, would it be worth a
+              conversation? Every engagement is scoped and quoted to the leaks
+              we find in your business — never more than the role it replaces.
             </motion.p>
           </motion.div>
         </div>
@@ -233,7 +245,7 @@ export default function PricingPage() {
               <div className="p-4 border-b border-white/5 col-span-1">
                 <span className="text-[#8892A4] text-sm font-medium">Feature</span>
               </div>
-              {["Starter", "Growth", "Enterprise"].map((tier) => (
+              {["Foundation", "Growth", "Enterprise"].map((tier) => (
                 <div key={tier} className={`p-4 border-b border-white/5 text-center ${tier === "Growth" ? "bg-[#0066FF]/5" : ""}`}>
                   <span className="text-white text-sm font-semibold" style={{ fontFamily: "var(--font-syne)" }}>
                     {tier}
@@ -250,7 +262,7 @@ export default function PricingPage() {
                 <div className="p-4 border-b border-white/5">
                   <span className="text-[#B8C4D4] text-sm">{row.feature}</span>
                 </div>
-                {(["starter", "growth", "enterprise"] as const).map((tier) => (
+                {(["foundation", "growth", "enterprise"] as const).map((tier) => (
                   <div
                     key={tier}
                     className={`p-4 border-b border-white/5 text-center ${tier === "growth" ? "bg-[#0066FF]/5" : ""}`}
