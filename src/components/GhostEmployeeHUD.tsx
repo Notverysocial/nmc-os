@@ -37,7 +37,7 @@ export default function GhostEmployeeHUD({ open, onClose }: GhostEmployeeHUDProp
       setMessages([
         {
           role: "assistant",
-          content: "Hi — I'm Nova. In the next 5 minutes I'll map where your business is leaking time and money, and tell you exactly which ghost employees to deploy first. What do you do? (one sentence is fine)",
+          content: "Hi — I'm Nova. In the next 5 minutes I'll find the money already sitting inside your business that you haven't captured yet, and name the two ghost employees that would unlock it. What do you sell, and what's one sale typically worth to you?",
         },
       ]);
       setMessageCount(0);
