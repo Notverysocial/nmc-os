@@ -11,6 +11,7 @@ import LiveFeed from "./LiveFeed";
 import SystemSpecTable from "./SystemSpecTable";
 import LogicFlow from "./LogicFlow";
 import QuizSection from "./QuizSection";
+import RevenueOpportunityCalculator from "./RevenueOpportunityCalculator";
 import ROICalculator from "./ROICalculator";
 import ScrollTape from "./ScrollTape";
 import LoginSequence from "./LoginSequence";
@@ -77,9 +78,50 @@ const timeline: { week: string; label: string; desc: string }[] = [
   { week: "WEEK 04+", label: "Expand & optimize", desc: "Monthly review. Find the next bottleneck. Deploy the next agent. Compound." },
 ];
 
-const plans: { name: string; price: string; period?: string; highlight?: boolean; tag?: string; items: string[]; cta: string }[] = [
-  { name: "Operator", price: "$499", period: "/mo", items: ["Up to 3 ghost employees", "1 core workflow automation", "Standard stack integrations", "Email + chat support"], cta: "Start with Operator" },
-  { name: "Command", price: "$999", period: "/mo", highlight: true, tag: "Most common", items: ["Up to 8 ghost employees", "Full workflow harness", "Priority integrations + custom tools", "Dedicated ops reviews", "Slack channel with our team"], cta: "Deploy Command" },
+const plans: { name: string; tier: string; equivalent: string; highlight?: boolean; tag?: string; items: string[]; cta: string; ctaAction: "report" | "call" | "contact" }[] = [
+  {
+    name: "Foundation",
+    tier: "TIER.01",
+    equivalent: "Equivalent human cost: $8,000+/mo",
+    items: [
+      "3 Ghost Employees",
+      "1 core workflow automation",
+      "Standard stack integrations",
+      "Email + chat support",
+    ],
+    cta: "Get Your Hidden Revenue Report",
+    ctaAction: "report",
+  },
+  {
+    name: "Growth",
+    tier: "TIER.02",
+    equivalent: "Equivalent human cost: $22,000+/mo",
+    highlight: true,
+    tag: "Most common",
+    items: [
+      "7 Ghost Employees",
+      "Full workflow harness",
+      "Priority integrations + custom tools",
+      "Dedicated ops reviews",
+      "Slack channel with our team",
+    ],
+    cta: "Book a Strategy Call",
+    ctaAction: "call",
+  },
+  {
+    name: "Enterprise",
+    tier: "TIER.03",
+    equivalent: "Equivalent human cost: $60,000+/mo",
+    items: [
+      "Unlimited Ghost Employees",
+      "Custom agent builds + private harness",
+      "White-glove onboarding",
+      "Dedicated strategist",
+      "Quarterly executive reviews",
+    ],
+    cta: "Contact Us",
+    ctaAction: "contact",
+  },
 ];
 
 const testimonials: { quote: string; name: string; role: string; company: string }[] = [
@@ -868,12 +910,50 @@ export default function SPAPage() {
             </GlassCard>
 
             <GlassCard>
+              <div id="revenue-calculator">
+                <motion.div
+                  initial="initial"
+                  whileInView="animate"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  style={{ textAlign: "center", marginBottom: "2.5rem" }}
+                >
+                  <motion.div variants={fadeUp} data-neural-node="true" style={{ marginBottom: "1.5rem" }}>
+                    <Pill label="[ REVENUE_ENGINE ]" sec="09" />
+                  </motion.div>
+                  <SectionHeading>
+                    The Hidden Revenue Diagnostic.
+                    <br />
+                    Six questions. One number.
+                  </SectionHeading>
+                  <motion.p
+                    variants={fadeUp}
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: "15px",
+                      color: "rgba(255,255,255,0.6)",
+                      maxWidth: "640px",
+                      margin: "1.25rem auto 0",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    Most businesses are leaking revenue in places they can&apos;t see.
+                    Answer six diagnostic questions and we&apos;ll quantify exactly how
+                    much your operation could be recovering every month — and which
+                    Ghost Employees would plug the leaks.
+                  </motion.p>
+                </motion.div>
+                <RevenueOpportunityCalculator />
+              </div>
+            </GlassCard>
+
+            <GlassCard>
               <motion.div variants={fadeUp}>
                 <Pill label="[ PRICING ]" sec="09" />
               </motion.div>
               <motion.div variants={fadeUp}>
                 <SectionHeading className="mb-14">
-                  If we find $10,000/month in revenue you're not capturing — and we usually do — would it be worth $499 to start?
+                  If we find revenue you are not capturing, would it be worth a conversation?
                 </SectionHeading>
               </motion.div>
 
@@ -884,7 +964,7 @@ export default function SPAPage() {
                   gap: "1px",
                   background: "rgba(26,43,80,0.3)",
                 }}
-                className="md:grid-cols-2"
+                className="md:grid-cols-3"
               >
                 {plans.map((plan) => (
                   <motion.div
@@ -917,43 +997,44 @@ export default function SPAPage() {
                       </div>
                     )}
 
+                    <span
+                      style={{
+                        fontFamily: "var(--font-jetbrains)",
+                        fontSize: "10px",
+                        letterSpacing: "0.14em",
+                        color: "rgba(100,140,200,0.7)",
+                        textTransform: "uppercase",
+                        display: "block",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      {plan.tier}
+                    </span>
+
                     <h3
                       style={{
                         fontFamily: "var(--font-jetbrains)",
-                        fontSize: "12px",
+                        fontSize: "14px",
                         letterSpacing: "0.12em",
                         color: "#ffffff",
                         textTransform: "uppercase",
-                        marginBottom: "1rem",
+                        marginBottom: "0.5rem",
                       }}
                     >
                       {plan.name}
                     </h3>
 
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "2rem" }}>
-                      <span
-                        style={{
-                          fontFamily: "var(--font-jetbrains)",
-                          fontSize: plan.price === "Custom" ? "2rem" : "3rem",
-                          fontWeight: 700,
-                          color: "#ffffff",
-                          lineHeight: 1,
-                          letterSpacing: "-0.03em",
-                        }}
-                      >
-                        {plan.price}
-                      </span>
-                      {plan.period && (
-                        <span
-                          style={{
-                            fontFamily: "var(--font-inter)",
-                            fontSize: "14px",
-                            color: "#FFFFFF",
-                          }}
-                        >
-                          {plan.period}
-                        </span>
-                      )}
+                    <div
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        fontSize: "12px",
+                        color: "rgba(200,200,220,0.55)",
+                        fontStyle: "italic",
+                        marginBottom: "2rem",
+                        letterSpacing: "0.01em",
+                      }}
+                    >
+                      {plan.equivalent}
                     </div>
 
                     <ul style={{ listStyle: "none", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -987,7 +1068,13 @@ export default function SPAPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+                      onClick={() => {
+                        if (plan.ctaAction === "report") {
+                          document.querySelector("#revenue-calculator")?.scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}
                       style={{
                         width: "100%",
                         padding: "12px",
@@ -1161,10 +1248,11 @@ export default function SPAPage() {
                         appearance: "none",
                       }}
                     >
-                      <option value="" disabled>Select a plan</option>
-                      <option value="foundation" style={{ background: "#00" }}>Foundation — $499/mo</option>
-                      <option value="growth" style={{ background: "#00" }}>Growth — $999/mo</option>
-                      <option value="enterprise" style={{ background: "#00" }}>Enterprise — Custom</option>
+                      <option value="" disabled>Select a tier</option>
+                      <option value="foundation" style={{ background: "#000" }}>Foundation — 3 Ghost Employees</option>
+                      <option value="growth" style={{ background: "#000" }}>Growth — 7 Ghost Employees</option>
+                      <option value="enterprise" style={{ background: "#000" }}>Enterprise — Unlimited</option>
+                      <option value="unsure" style={{ background: "#000" }}>Not sure yet — help me scope it</option>
                     </select>
                   </div>
 
